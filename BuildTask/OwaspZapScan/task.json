@@ -1,10 +1,10 @@
 {
     "$schema": "https://raw.githubusercontent.com/AArnott/vso-agent-tasks/9b41d803a/tasks.schema.json",
-    "id": "dbe30948-5954-4e03-ab88-b35c3b16ec46",
+    "id": "ef7656a8-2446-483a-b9e7-b234d09476b8",
     "name": "OwaspZapScan",
-    "friendlyName": "OWASP Zed Attack Proxy Scan",
+    "friendlyName": "AdvantageCS OWASP Zed Attack Proxy Scan",
     "description": "Visual Studio Team Services build/release task for running OWASP ZAP automated security tests",
-    "helpMarkDown": "[More Information](https://github.com/kasunkv/owasp-zap-vsts-task)",
+    "helpMarkDown": "[More Information](https://github.com/AdvantageCS/owasp-zap-vsts-task)",
     "category": "Test",
     "visibility": [
         "Build",
@@ -15,11 +15,11 @@
         "MachineGroup",
         "Server"
     ],
-    "author": "Kasun Kodagoda",
+    "author": "AdvantageCS (forked from Kasun Kodagoda)",
     "version": {
         "Major": 1,
         "Minor": 57,
-        "Patch": 0
+        "Patch": 1
     },
     "demands": [
         "npm"
