@@ -1,10 +1,5 @@
 {
     "defaultSeverity": "error",
-    /*
-    "extends": [
-        "tslint:recommended"
-    ],
-    */
     "jsRules": {},
     "rulesDirectory": [
         "node_modules/tslint-eslint-rules/dist/rules",
@@ -14,8 +9,7 @@
         "adjacent-overload-signatures": true,
         "align": [false, "parameters", "arguments", "statements"],
         "arrow-parens": [true, "ban-single-arg-parens"],
-        "arrow-return-shorthand": [true /*, "multiline"*/],
-        //"await-promise": true,
+        "arrow-return-shorthand": [true],
         "class-name": true,
         "curly": true,
         "eofline": false,
@@ -63,12 +57,11 @@
         "no-string-throw": true,
         "no-switch-case-fall-through": true,
         "no-unnecessary-initializer": true,
-        "no-unused-expression": [true /*,"allow-fast-null-checks"*/],
+        "no-unused-expression": [true],
         "no-var-keyword": true,
-        // "no-var-requires": true, /* Disabled due to the issue of importing thread-sleep module */
         "object-literal-key-quotes": [true, "as-needed"],
         "only-arrow-functions": [true, "allow-declarations", "allow-named-functions"],
-        "one-line": [true, "check-open-brace", "check-catch", "check-whitespace" /*, "check-else" */],
+        "one-line": [true, "check-open-brace", "check-catch", "check-whitespace"],
         "prefer-const": true,
         "prefer-method-signature": true,
         "quotemark": [ true, "single" ],
@@ -76,7 +69,7 @@
         "semicolon": [true, "always"],
         "space-before-function-paren": [true, {"anonymous": "always", "named": "never", "asyncArrow": "always"}],
         "triple-equals": [ true ], 
-        "typedef": [ true, "call-signature", /*"arrow-call-signature",*/ "parameter", /*"arrow-parameter",*/ "property-declaration", /*"variable-declaration",*/ "member-variable-declaration"],
+        "typedef": [ true, "call-signature", "parameter", "property-declaration", "member-variable-declaration"],
         "typedef-whitespace": [
           true,
           {
@@ -87,13 +80,11 @@
             "variable-declaration": "nospace"
           }
         ],
-        "typeof-compare": true,
         "unified-signatures": true,
         "use-isnan": true,
         "variable-name": [true, "allow-leading-underscore"],
         "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-module", "check-separator", "check-type", "check-preblock" /*, "check-typecast"*/], 
     
-        /* TSLINT-ESLINT-RULES rules */ 
         "no-constant-condition": true,  
         "no-control-regex": true,
         "no-duplicate-case": true,
@@ -110,11 +101,9 @@
         "valid-typeof": true,
         "handle-callback-err": true,
         
-        /* TSLINT-MICROSOFT-CONTRIB [SECURITY] rules */
-        "no-var-self": true,
+        "no-this-assignment": true,
         "insecure-random": true,
         "no-banned-terms": true,
-        //"no-cookies": true,
         "no-delete-expression": true,
         "no-disable-auto-sanitization": true,
         "no-document-domain": true,
@@ -129,7 +118,6 @@
         "no-string-based-set-timeout": true,
         "possible-timing-attack": true,
 
-        /* TSLINT-MICROSOFT-CONTRIB [BUGS AND CORRECTNESS] rules */
         "jquery-deferred-must-complete": true,
         "mocha-avoid-only": true,
         "mocha-no-side-effect-code": true,
@@ -140,27 +128,24 @@
         "promise-must-complete": true,
         "use-named-parameter": true,
     
-        /* TSLINT-MICROSOFT-CONTRIB [CODE CLARITY] rules */
         "function-name": [
           false,
           {
-            "method-regex": "^[a-z][\\w\\d]+$", // "^[a-z][\\w\\d]+$"
-            "private-method-regex": "^[_a-z][\\w\\d]+$", // changed from default: "^[a-z][\\w\\d]+$"
+            "method-regex": "^[a-z][\\w\\d]+$", 
+            "private-method-regex": "^[_a-z][\\w\\d]+$", 
             "protected-method-regex": "^[a-z][\\w\\d]+$",
-            "static-method-regex": "^[a-z][\\w\\d]+$", // changed from default: "^[A-Z_\\d]+$"
+            "static-method-regex": "^[a-z][\\w\\d]+$", 
             "function-regex": "^[a-z][\\w\\d]+$"
           }
         ],
         "max-func-body-length": [true, 1000, {"ignore-parameters-to-function-regex": "describe"}],
         "mocha-unneeded-done": true,
-        // "no-for-in": true, /* Disabling for later refactor */
         "no-multiline-string": true,
         "no-typeof-undefined": true,
         "no-unnecessary-field-initialization": true,
         "no-unsupported-browser-code": true,
         "underscore-consistent-invocation": true,
     
-        /* TSLINT-MICROSOFT-CONTRIB [WHITESPACE] rules */
         "no-unnecessary-semicolons": true
     }
 }
