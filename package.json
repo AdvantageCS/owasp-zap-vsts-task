@@ -15,6 +15,7 @@
     "restore-prod": "pushd \"dist/BuildTask/OwaspZapScan\" && npm install --only=production && popd",
     "build": "npm run move-npm && npm run restore-prod && npm run lint && npm run compile && npm run move-task",
     "build-clean": "npm run clean && npm run build",
+    "package": "tfx extension create --manifest-globs vss-extension.json --rev-version",
     "publish-local": "tfx build tasks upload --task-path ./dist/BuildTask/OwaspZapScan",
     "semantic-release": "semantic-release pre && semantic-release post",
     "test-clean": "rimraf spec",
