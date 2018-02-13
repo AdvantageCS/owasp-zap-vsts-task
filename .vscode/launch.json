@@ -22,7 +22,7 @@
                 "INPUT_Recurse": "true",
                 "INPUT_InScopeOnly": "true",
                 "INPUT_ReportType": "html",
-                "INPUT_ReportFileDestination": "c:\temp",
+                "INPUT_ReportFileDestination": "c:\\temp",
                 "INPUT_ReportFileName": "owasp-scan"
             },
             "outFiles": [
