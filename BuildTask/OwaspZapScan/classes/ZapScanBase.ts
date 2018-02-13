@@ -9,6 +9,7 @@ import { ScanResult } from '../interfaces/types/ScanResult';
 import { ZapScanResult, ZapScanStatus, ZapActiveScanOptions, ZapScanStatusOptions } from '../interfaces/types/ZapScan';
 import { ZapScanType } from './../enums/Enums';
 import { TaskInput } from './TaskInput';
+import { ZapScanOptionsBase } from './../interfaces/types/ZapScan';
 
 export abstract class ZapScanBase implements IZapScan {
     zapScanType: ZapScanType;
@@ -16,8 +17,11 @@ export abstract class ZapScanBase implements IZapScan {
     requestOptions: Request.UriOptions & RequestPromise.RequestPromiseOptions;
     protected taskInputs: TaskInput;
 
-    constructor(taskInputs: TaskInput) {
+    constructor(taskInputs: TaskInput, zapScanType: ZapScanType, scanType: string, requestOptions: Request.UriOptions & RequestPromise.RequestPromiseOptions) {
         this.taskInputs = taskInputs;
+        this.zapScanType = zapScanType;
+        this.scanType = scanType;
+        this.requestOptions = requestOptions;
     }
 
     ExecuteScan(): Promise<ScanResult> {

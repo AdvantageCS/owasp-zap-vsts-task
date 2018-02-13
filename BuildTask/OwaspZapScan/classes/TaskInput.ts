@@ -1,6 +1,6 @@
 export class TaskInput {
     /* Required */
-    private _zapApiKey: string;
+    private _zapApiKey: string | undefined;
     set ZapApiKey(value: string) {
         this._zapApiKey = value;
     }
@@ -14,7 +14,7 @@ export class TaskInput {
     }
 
 
-    private _zapApiUrl: string;
+    private _zapApiUrl: string | undefined;
     set ZapApiUrl(value: string) {
         this._zapApiUrl = value;
     }
@@ -28,7 +28,7 @@ export class TaskInput {
     }
 
     
-    private _targetUrl: string;
+    private _targetUrl: string | undefined;
     set TargetUrl(value: string) {
         this._targetUrl = value;
     }
@@ -43,280 +43,217 @@ export class TaskInput {
 
 
     /* Spider Scan */
-    private _executeSpiderScan: boolean;
+    private _executeSpiderScan: boolean = false;
     set ExecuteSpiderScan(value: boolean) {
         this._executeSpiderScan = value;
     }
 
     get ExecuteSpiderScan(): boolean {
-        if (this._executeSpiderScan) {
-            return this._executeSpiderScan;
-        }
-        return false;
+        return this._executeSpiderScan;
     }
 
 
-    private _recurseSpider: boolean;
+    private _recurseSpider: boolean = false;
     set RecurseSpider(value: boolean) {
         this._recurseSpider = value;
     }
 
     get RecurseSpider(): boolean {
-        if (this._recurseSpider) {
-            return this._recurseSpider;
-        }
-        return false;
+        return this._recurseSpider;
     }
     
     
-    private _subTreeOnly: boolean;
+    private _subTreeOnly: boolean = false;
     set SubTreeOnly(value: boolean) {
         this._subTreeOnly = value;
     }
 
     get SubTreeOnly(): boolean {
-        if (this._subTreeOnly) {
-            return this._subTreeOnly;
-        }
-        return false;
+        return this._subTreeOnly;
     }
     
     
-    private _maxChildrenToCrawl: string;
+    private _maxChildrenToCrawl: string = '';
     set MaxChildrenToCrawl(value: string) {
         this._maxChildrenToCrawl = value;
     }
 
     get MaxChildrenToCrawl(): string {
-        if (this._maxChildrenToCrawl) {
-            return this._maxChildrenToCrawl;
-        }
-        return '';
+        return this._maxChildrenToCrawl;
     }
 
 
-    private _contextName: string;
+    private _contextName: string = '';
     set ContextName(value: string) {
         this._contextName = value;
     }
 
     get ContextName(): string {
-        if (this._contextName) {
-            return this._contextName;
-        }
-        return '';
+        return this._contextName;
     }
 
 
     /* Active Scan */
-    private _executeActiveScan: boolean;
+    private _executeActiveScan: boolean = false;
     set ExecuteActiveScan(value: boolean) {
         this._executeActiveScan = value;
     }
 
     get ExecuteActiveScan(): boolean {
-        if (this._executeActiveScan) {
-            return this._executeActiveScan;
-        }
-        return false;
+        return this._executeActiveScan;
     }
 
 
-    private _contextId: string;
+    private _contextId: string = '';
     set ContextId(value: string) {
         this._contextId = value;
     }
 
     get ContextId(): string {
-        if (this._contextId) {
-            return this._contextId;
-        }
-        return '';
+        return this._contextId;
     }
 
 
-    private _recurse: boolean;
+    private _recurse: boolean = false;
     set Recurse(value: boolean) {
         this._recurse = value;
     }
 
     get Recurse(): boolean {
-        if (this._recurse) {
-            return this._recurse;
-        }
-        return false;
+        return this._recurse;
     }
 
 
-    private _inScopeOnly: boolean;
+    private _inScopeOnly: boolean = false;
     set InScopeOnly(value: boolean) {
         this._inScopeOnly = value;
     }
 
     get InScopeOnly(): boolean {
-        if (this._inScopeOnly) {
-            return this._inScopeOnly;
-        }
-        return false;
+        return this._inScopeOnly;
     }
 
 
-    private _scanPolicyName: string;
+    private _scanPolicyName: string = '';
     set ScanPolicyName(value: string) {
         this._scanPolicyName = value;
     }
 
     get ScanPolicyName(): string {
-        if (this._scanPolicyName) {
-            return this._scanPolicyName;
-        }
-        return '';
+        return this._scanPolicyName;
     }
 
 
-    private _method: string;
+    private _method: string = '';
     set Method(value: string) {
         this._method = value;
     }
 
     get Method(): string {
-        if (this._method) {
-            return this._method;
-        }
-        return '';
+        return this._method;
     }
 
 
-    private _postData: string;
+    private _postData: string = '';
     set PostData(value: string) {
         this._postData = value;
     }
 
     get PostData(): string {
-        if (this._postData) {
-            return this._postData;
-        }
-        return '';
+        return this._postData;
     }
 
 
     
     /* Reporting */
-    private _reportType: string;
+    private _reportType: string = '';
     set ReportType(value: string) {
         this._reportType = value;
     }
 
     get ReportType(): string {
-        if (this._reportType) {
-            return this._reportType;
-        }
-        return '';
+        return this._reportType;
     }
 
 
-    private _reportFileDestination: string;
+    private _reportFileDestination: string = '';
     set ReportFileDestination(value: string) {
         this._reportFileDestination = value;
     }
 
     get ReportFileDestination(): string {
-        if (this._reportFileDestination) {
-            return this._reportFileDestination;
-        }
-        return '';
+        return this._reportFileDestination;
     }
 
 
-    private _reportFileName: string;
+    private _reportFileName: string = '';
     set ReportFileName(value: string) {
         this._reportFileName = value;
     }
 
     get ReportFileName(): string {
-        if (this._reportFileName) {
-            return this._reportFileName;
-        }
-        return '';
+        return this._reportFileName;
     }
 
 
-    private _projectName: string;
+    private _projectName: string = '';
     set ProjectName(value: string) {
         this._projectName = value;
     }
 
     get ProjectName(): string {
-        if (this._projectName) {
-            return this._projectName;
-        }
-        return '';
+        return this._projectName;
     }
 
 
-    private _buildDefinitionName: string;
+    private _buildDefinitionName: string = '';
     set BuildDefinitionName(value: string) {
         this._buildDefinitionName = value;
     }
 
     get BuildDefinitionName(): string {
-        if (this._buildDefinitionName) {
-            return this._buildDefinitionName;
-        }
-        return '';
+        return this._buildDefinitionName;
     }
 
 
 
     /* Verification */
-    private _enableVerifications: boolean;
+    private _enableVerifications: boolean = false;
     set EnableVerifications(value: boolean) {
         this._enableVerifications = value;
     }
 
     get EnableVerifications(): boolean {
-        if (this._enableVerifications) {
-            return this._enableVerifications;
-        }
-        return false;
+        return this._enableVerifications;
     }
 
 
-    private _maxHighRiskAlerts: number;
+    private _maxHighRiskAlerts: number = 0;
     set MaxHighRiskAlerts(value: number) {
         this._maxHighRiskAlerts = value;
     }
 
     get MaxHighRiskAlerts(): number {
-        if (this._maxHighRiskAlerts) {
-            return this._maxHighRiskAlerts;
-        }
-        return 0;
+        return this._maxHighRiskAlerts;
     }
 
 
-    private _maxMediumRiskAlerts: number;
+    private _maxMediumRiskAlerts: number = 0;
     set MaxMediumRiskAlerts(value: number) {
         this._maxMediumRiskAlerts = value;
     }
 
     get MaxMediumRiskAlerts(): number {
-        if (this._maxMediumRiskAlerts) {
-            return this._maxMediumRiskAlerts;
-        }
-        return 0;
+        return this._maxMediumRiskAlerts;
     }
 
 
-    private _maxLowRiskAlerts: number;
+    private _maxLowRiskAlerts: number = 0;
     set MaxLowRiskAlerts(value: number) {
         this._maxLowRiskAlerts = value;
     }
 
     get MaxLowRiskAlerts(): number {
-        if (this._maxLowRiskAlerts) {
-            return this._maxLowRiskAlerts;
-        }
-        return 0;
+        return this._maxLowRiskAlerts;
     }
 }

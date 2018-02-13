@@ -5,33 +5,24 @@ import { ZapScanType } from '../enums/Enums';
 import { TaskInput } from './TaskInput';
 
 export class SpiderScan extends ZapScanBase {
-    zapScanType: ZapScanType = ZapScanType.Spider;
-    private _scanOptions: ZapSpiderScanOptions;    
-
     constructor(taskInputs: TaskInput) {
-        super(taskInputs);
-
-        /* Set Scan Type for Logging */
-        this.scanType = 'Spider Scan';
-
         /* Spider Scan Options */
-        this._scanOptions = {
-            apikey: this.taskInputs.ZapApiKey,
-            url: this.taskInputs.TargetUrl,        
-            maxChildren: this.taskInputs.MaxChildrenToCrawl,
-            recurse: String(this.taskInputs.RecurseSpider),
-            subtreeOnly: String(this.taskInputs.SubTreeOnly),
-            contextName: this.taskInputs.ContextName,
+        const scanOptions = {
+            apikey: taskInputs.ZapApiKey,
+            url: taskInputs.TargetUrl,        
+            maxChildren: taskInputs.MaxChildrenToCrawl,
+            recurse: String(taskInputs.RecurseSpider),
+            subtreeOnly: String(taskInputs.SubTreeOnly),
+            contextName: taskInputs.ContextName,
             formMethod: 'GET',
             zapapiformat: 'JSON'
         };
 
-        /* Scan Request Options */
-        this.requestOptions = {
+        super(taskInputs, ZapScanType.Spider, 'Spider Scan', {
             // tslint:disable-next-line:no-http-string
-            uri: `http://${this.taskInputs.ZapApiUrl}/JSON/spider/action/scan/`,
-            qs: this._scanOptions
-        };   
+            uri: `http://${taskInputs.ZapApiUrl}/JSON/spider/action/scan/`,
+            qs: scanOptions
+        });
     }
     
     ExecuteScan(): Promise<ScanResult> {

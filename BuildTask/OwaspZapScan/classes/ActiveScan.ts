@@ -5,35 +5,24 @@ import { ZapScanType } from '../enums/Enums';
 import { TaskInput } from './TaskInput';
 
 export class ActiveScan extends ZapScanBase {
-    zapScanType: ZapScanType = ZapScanType.Active;    
-    private _scanOptions: ZapActiveScanOptions;    
-
     constructor(taskInputs: TaskInput) {
-        super(taskInputs);
-        
-        /* Set Scan Type for Logging */
-        this.scanType = 'Active Scan';
-
-        /* Active Scan Options */
-        this._scanOptions = {
-            apikey: this.taskInputs.ZapApiKey,
-            url: this.taskInputs.TargetUrl,
-            contextId: this.taskInputs.ContextId,
-            method: this.taskInputs.Method,
-            inScopeOnly: String(this.taskInputs.InScopeOnly),
-            recurse: String(this.taskInputs.Recurse),
-            scanPolicyName: this.taskInputs.ScanPolicyName,
-            postData: this.taskInputs.PostData,
-            zapapiformat: 'JSON',
-            formMethod: 'GET'
-        };
-
-        /* Scan Request Options */
-        this.requestOptions = {
+        const requestOptions = {
             // tslint:disable-next-line:no-http-string
-            uri: `http://${this.taskInputs.ZapApiUrl}/JSON/ascan/action/scan/`,
-            qs: this._scanOptions
+            uri: `http://${taskInputs.ZapApiUrl}/JSON/ascan/action/scan/`,
+            qs: {
+                apikey: taskInputs.ZapApiKey,
+                url: taskInputs.TargetUrl,
+                contextId: taskInputs.ContextId,
+                method: taskInputs.Method,
+                inScopeOnly: String(taskInputs.InScopeOnly),
+                recurse: String(taskInputs.Recurse),
+                scanPolicyName: taskInputs.ScanPolicyName,
+                postData: taskInputs.PostData,
+                zapapiformat: 'JSON',
+                formMethod: 'GET'
+            }
         };
+        super(taskInputs, ZapScanType.Active, 'Active Scan', requestOptions);
     }
 
     ExecuteScan(): Promise<ScanResult> {
