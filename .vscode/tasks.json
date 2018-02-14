@@ -23,6 +23,13 @@
             "type": "npm",
             "script": "package",
             "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "test-build",
+            "problemMatcher": [
+                "$tsc"
+            ]
         }
     ]
 }
