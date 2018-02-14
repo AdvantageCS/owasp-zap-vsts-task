@@ -12,7 +12,7 @@
             "env": {
                 "INPUT_ZapApiUrl": "localhost:8090",
                 "INPUT_ZapApiKey": "lgcum95ipph9pubhnbthjq37bs",
-                "INPUT_TargetUrl": "https://localhost/card-vault",
+                "INPUT_TargetUrl": "https://localhost/card-vault/admin",
                 "INPUT_ExecuteSpiderScan": "true",
                 "INPUT_RecurseSpider": "true",
                 "INPUT_SubtreeOnly": "true",
