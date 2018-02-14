@@ -83,25 +83,19 @@ async function run(): Promise<void> {
         }
     }
 
-    /* If all scans are successful: 1). Generate the Report 2). Perform the Verifications */
-    if (scanStatus.Success) {
-
-        /* Generate the report */
-        console.log('Generating the report...');
-        const isSuccess: boolean = await report.GenerateReport();
-        
-        if (!isSuccess) {
-            hasIssues = isSuccess;
-        }
-
-        /* Perform the Verifications and Print the report */
-        const verify: Verify = new Verify(helper, report, taskInputs);
-        verify.Assert();
-
-        Task.setResult(hasIssues ? Task.TaskResult.SucceededWithIssues : Task.TaskResult.Succeeded, 'OWASP ZAP Active Scan Complete. Result is within the expected thresholds.');
-    } else {
-        Task.error('A scan failed to complete.');
+    /* Generate the report */
+    console.log('Generating the report...');
+    const isSuccess: boolean = await report.GenerateReport();
+    
+    if (!isSuccess) {
+        hasIssues = isSuccess;
     }
+
+    /* Perform the Verifications and Print the report */
+    const verify: Verify = new Verify(helper, report, taskInputs);
+    verify.Assert();
+
+    Task.setResult(hasIssues ? Task.TaskResult.SucceededWithIssues : Task.TaskResult.Succeeded, 'OWASP ZAP Active Scan Complete. Result is within the expected thresholds.');
 }   
 
 run().catch((err: any) => {
