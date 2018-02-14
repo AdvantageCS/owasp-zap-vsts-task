@@ -31,11 +31,8 @@
                 "INPUT_ExecuteSpiderScan": "true",
                 "INPUT_RecurseSpider": "true",
                 "INPUT_SubtreeOnly": "true",
-                "INPUT_ContextName": "",
                 "INPUT_ExecuteActiveScan": "true",
-                "INPUT_ContextId": "",
                 "INPUT_Recurse": "true",
-                "INPUT_InScopeOnly": "true",
                 "INPUT_ReportType": "html",
                 "INPUT_ReportFileDestination": "c:\\temp",
                 "INPUT_ReportFileName": "owasp-scan"
