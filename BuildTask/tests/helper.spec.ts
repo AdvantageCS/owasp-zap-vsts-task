@@ -159,16 +159,3 @@ describe('OWASP Zap Scan Helpers', () => {
     });
     
 });
-
-
-describe('OWASP ZAP Scan Task Tests', function () {
-    before(() => {});
-
-    after(() => {});
-
-    it('Simple Test', (done: MochaDone) => {
-        this.timeout(1000);
-
-        done();                
-    });
-});
