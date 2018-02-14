@@ -61,13 +61,13 @@ async function run(): Promise<void> {
 
     /* Add Spider Scan is selected */
     if (taskInputs.ExecuteSpiderScan) {
-        const spiderScan: SpiderScan = new SpiderScan(taskInputs);
+        const spiderScan: SpiderScan = new SpiderScan(taskInputs, requestService);
         selectedScans.push(spiderScan);
     }
 
     /* Add the Active Scan */
     if (taskInputs.ExecuteActiveScan) {
-        const activeScan: ActiveScan = new ActiveScan(taskInputs);
+        const activeScan: ActiveScan = new ActiveScan(taskInputs, requestService);
         selectedScans.push(activeScan);
     }    
 

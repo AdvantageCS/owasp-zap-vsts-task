@@ -3,10 +3,11 @@ import { ScanResult } from './../interfaces/types/ScanResult';
 import { ZapActiveScanOptions } from './../interfaces/types/ZapScan';
 import { ZapScanType } from '../enums/Enums';
 import { TaskInput } from './TaskInput';
+import { RequestService } from './RequestService';
 
 export class ActiveScan extends ZapScanBase {
-    constructor(taskInputs: TaskInput) {
-        const requestOptions = {
+    constructor(taskInputs: TaskInput, requestService: RequestService) {
+        super(taskInputs, ZapScanType.Active, 'Active Scan', requestService, {
             // tslint:disable-next-line:no-http-string
             uri: `http://${taskInputs.ZapApiUrl}/JSON/ascan/action/scan/`,
             qs: {
@@ -21,8 +22,7 @@ export class ActiveScan extends ZapScanBase {
                 zapapiformat: 'JSON',
                 formMethod: 'GET'
             }
-        };
-        super(taskInputs, ZapScanType.Active, 'Active Scan', requestOptions);
+        });
     }
 
     ExecuteScan(): Promise<ScanResult> {

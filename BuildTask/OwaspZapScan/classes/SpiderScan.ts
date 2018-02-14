@@ -3,9 +3,10 @@ import { ScanResult } from './../interfaces/types/ScanResult';
 import { ZapSpiderScanOptions } from '../interfaces/types/ZapScan';
 import { ZapScanType } from '../enums/Enums';
 import { TaskInput } from './TaskInput';
+import { RequestService } from './RequestService';
 
 export class SpiderScan extends ZapScanBase {
-    constructor(taskInputs: TaskInput) {
+    constructor(taskInputs: TaskInput, requestService: RequestService) {
         /* Spider Scan Options */
         const scanOptions = {
             apikey: taskInputs.ZapApiKey,
@@ -18,7 +19,7 @@ export class SpiderScan extends ZapScanBase {
             zapapiformat: 'JSON'
         };
 
-        super(taskInputs, ZapScanType.Spider, 'Spider Scan', {
+        super(taskInputs, ZapScanType.Spider, 'Spider Scan', requestService, {
             // tslint:disable-next-line:no-http-string
             uri: `http://${taskInputs.ZapApiUrl}/JSON/spider/action/scan/`,
             qs: scanOptions

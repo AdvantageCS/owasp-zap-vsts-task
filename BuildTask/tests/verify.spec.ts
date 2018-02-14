@@ -43,7 +43,7 @@ describe('OWASP Zap Scan Verify ', () => {
 
             // Stub RequestService
             requestService = new RequestService();                
-            sinon.stub(requestService, 'ExecuteRequest').returns('');
+            sinon.stub(requestService, 'SendRequestGetResponseAsString').returns('');
 
             // Stub Report
             report = new Report(helper, requestService, taskInput);

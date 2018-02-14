@@ -10,44 +10,40 @@ import { ZapScanResult, ZapScanStatus, ZapActiveScanOptions, ZapScanStatusOption
 import { ZapScanType } from './../enums/Enums';
 import { TaskInput } from './TaskInput';
 import { ZapScanOptionsBase } from './../interfaces/types/ZapScan';
+import { RequestService } from './RequestService';
 
 export abstract class ZapScanBase implements IZapScan {
     zapScanType: ZapScanType;
     scanType: string;    
     requestOptions: Request.UriOptions & RequestPromise.RequestPromiseOptions;
     protected taskInputs: TaskInput;
+    private requestService: RequestService;
 
-    constructor(taskInputs: TaskInput, zapScanType: ZapScanType, scanType: string, requestOptions: Request.UriOptions & RequestPromise.RequestPromiseOptions) {
+    constructor(taskInputs: TaskInput, zapScanType: ZapScanType, scanType: string, requestService: RequestService, requestOptions: Request.UriOptions & RequestPromise.RequestPromiseOptions) {
         this.taskInputs = taskInputs;
         this.zapScanType = zapScanType;
         this.scanType = scanType;
         this.requestOptions = requestOptions;
+        this.requestService = requestService;
     }
 
     ExecuteScan(): Promise<ScanResult> {
-        Task.debug(`${this.scanType} | Target URL: ${this.requestOptions.uri} | Scan Options: ${JSON.stringify(this.requestOptions.qs)}`);
-        
         const scanResult: ScanResult = { Success: false };
-        
-        return new Promise<ScanResult>((resolve, reject) => {
-            RequestPromise(this.requestOptions)
-                .then(async (res: any) => {
-                    const result: ZapScanResult = JSON.parse(res);
-                    console.log(`OWASP ZAP ${this.scanType} Initiated. ID: ${result.scan}`);
-
-                    scanResult.Success = await this.CheckScanStatus(result.scan, this.zapScanType);
-                    if (!scanResult.Success) {
-                        scanResult.Message = `${this.scanType} status check failed.`;
-                        reject(scanResult);
-                    }                    
-                    resolve(scanResult);
-                })
-                .error((err: any) => {
-                    scanResult.Success = false;
-                    scanResult.Message = err.message || err;
-                    reject(scanResult);
-                }); 
-        });
+        return this.requestService.SendRequestGetResponseAs<ZapScanResult>(this.scanType, this.requestOptions)
+            .then(async (result: ZapScanResult) => {
+                console.log(`OWASP ZAP ${this.scanType} Initiated. ID: ${result.scan}`);
+                scanResult.Success = await this.CheckScanStatus(result.scan, this.zapScanType);
+                if (!scanResult.Success) {
+                    scanResult.Message = `${this.scanType} status check failed.`;
+                    return Promise.reject(scanResult);
+                }                    
+                return Promise.resolve(scanResult);
+            })
+            .catch((err: any) => {
+                scanResult.Success = false;
+                scanResult.Message = err.message || err;
+                return Promise.reject(scanResult);
+            }); 
     }
 
     protected CheckScanStatus(scanId: number, scanType: ZapScanType): Promise<boolean> {
@@ -108,18 +104,9 @@ export abstract class ZapScanBase implements IZapScan {
             qs: statusOptions
         };
 
-        Task.debug(`${this.scanType} | ZAP API Call: ${this.requestOptions.uri} | Request Options: ${JSON.stringify(statusOptions)}`);
-
-        return new Promise<number>((resolve, reject) => {
-            RequestPromise(requestOptions)
-                .then((res: any) => {
-                    const result: ZapScanStatus = JSON.parse(res);
-                    Task.debug(`${this.scanType} | Status Result: ${JSON.stringify(res)}`);                    
-                    resolve(result.status);
-                })
-                .error((err: any) => {
-                    reject(err);
-                });
-        });
-    }    
+        return this.requestService.SendRequestGetResponseAs<ZapScanStatus>('Get Scan Status', requestOptions)
+            .then((result: ZapScanStatus) => {
+                return result.status;
+            });
+    }
 }

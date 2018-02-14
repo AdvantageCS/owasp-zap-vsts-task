@@ -1,8 +1,12 @@
-/* ZAP Scan/Result Request Interfaces */
-export interface ZapScanOptionsBase {
-    zapapiformat: string;
+/* ZAP Request Interfaces */
+
+export interface ZapRequestOptionsBase {
     formMethod: string;
     apikey: string;
+}
+
+export interface ZapScanOptionsBase extends ZapRequestOptionsBase {
+    zapapiformat: string;
 }
 
 export interface ZapActiveScanOptions extends ZapScanOptionsBase {    
@@ -27,9 +31,9 @@ export interface ZapScanStatusOptions extends ZapScanOptionsBase {
     scanId: number;
 }
 
-export interface ZapScanReportOptions {
-    formMethod: string;
-    apikey: string;
+export interface ZapNewContextOptions extends ZapRequestOptionsBase {
+    zapapiformat: string;
+    contextName: number;
 }
 
 export interface ZapScanStatus {

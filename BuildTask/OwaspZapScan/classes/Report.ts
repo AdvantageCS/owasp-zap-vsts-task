@@ -10,12 +10,12 @@ import { AlertRowType, ReportType } from './../enums/Enums';
 import { Constants } from './Constants';
 import { Helper } from './../classes/Helper';
 import { AlertResult } from './../interfaces/types/AlertResult';
-import { ZapScanReportOptions } from './../interfaces/types/ZapScan';
+import { ZapRequestOptionsBase } from './../interfaces/types/ZapScan';
 import { TaskInput } from './TaskInput';
 import { RequestService } from './RequestService';
 
 export class Report {
-    private _reportOptions: ZapScanReportOptions;
+    private _reportOptions: ZapRequestOptionsBase;
     private _requestOptions: Request.UriOptions & RequestPromise.RequestPromiseOptions;  
 
     private _helper: Helper;    
@@ -51,12 +51,7 @@ export class Report {
 
         this._requestOptions.uri = `${this._requestOptions.uri}/${reportType}/`;
 
-        /* istanbul ignore if */
-        if (process.env.NODE_ENV !== 'test') {
-            Task.debug(`Active Scan Results | ZAP API Call: ${this._requestOptions.uri} | Request Options: ${JSON.stringify(this._requestOptions)}`);
-        }
-
-        return this._requestService.ExecuteRequest(this._requestOptions);
+        return this._requestService.SendRequestGetResponseAsString('Active Scan Results', this._requestOptions);
     }
 
     async GenerateReport(): Promise<boolean> {

@@ -39,7 +39,7 @@ describe('OWASP Zap Scan Reports', () => {
                 requestService = new RequestService();
                 const xmlPath = path.join(__dirname, 'valid.xml');
                 xmlString = fs.readFileSync(xmlPath, 'utf8');
-                sinon.stub(requestService, 'ExecuteRequest').returns(xmlString);           
+                sinon.stub(requestService, 'SendRequestGetResponseAsString').returns(xmlString);           
                 
                 report = new Report(helper, requestService, taskInput);
             });
@@ -65,7 +65,7 @@ describe('OWASP Zap Scan Reports', () => {
                 requestService = new RequestService();
                 const htmlPath = path.join(__dirname, 'valid.html');
                 htmlString = fs.readFileSync(htmlPath, 'utf8');
-                sinon.stub(requestService, 'ExecuteRequest').returns(htmlString);
+                sinon.stub(requestService, 'SendRequestGetResponseAsString').returns(htmlString);
     
                 report = new Report(helper, requestService, taskInput);
             });
@@ -91,7 +91,7 @@ describe('OWASP Zap Scan Reports', () => {
                 requestService = new RequestService();
                 const mdPath = path.join(__dirname, 'valid.md');
                 mdString = fs.readFileSync(mdPath, 'utf8');
-                sinon.stub(requestService, 'ExecuteRequest').returns(mdString);
+                sinon.stub(requestService, 'SendRequestGetResponseAsString').returns(mdString);
     
                 report = new Report(helper, requestService, taskInput);
             });
@@ -146,7 +146,7 @@ describe('OWASP Zap Scan Reports', () => {
                     requestService = new RequestService();
                     const mdPath = path.join(__dirname, 'valid.xml');
                     xmlString = fs.readFileSync(mdPath, 'utf8');
-                    sinon.stub(requestService, 'ExecuteRequest').returns(xmlString);
+                    sinon.stub(requestService, 'SendRequestGetResponseAsString').returns(xmlString);
 
                     taskInput.ReportType = 'xml';
 
@@ -177,7 +177,7 @@ describe('OWASP Zap Scan Reports', () => {
                     requestService = new RequestService();
                     const mdPath = path.join(__dirname, 'valid.html');
                     xmlString = fs.readFileSync(mdPath, 'utf8');
-                    sinon.stub(requestService, 'ExecuteRequest').returns(xmlString);
+                    sinon.stub(requestService, 'SendRequestGetResponseAsString').returns(xmlString);
 
                     taskInput.ReportType = 'html';
 
@@ -208,7 +208,7 @@ describe('OWASP Zap Scan Reports', () => {
                     requestService = new RequestService();
                     const mdPath = path.join(__dirname, 'valid.md');
                     xmlString = fs.readFileSync(mdPath, 'utf8');
-                    sinon.stub(requestService, 'ExecuteRequest').returns(xmlString);
+                    sinon.stub(requestService, 'SendRequestGetResponseAsString').returns(xmlString);
 
                     taskInput.ReportType = 'md';
 
@@ -242,7 +242,7 @@ describe('OWASP Zap Scan Reports', () => {
 
                 // Stub RequestService
                 requestService = new RequestService();
-                sinon.stub(requestService, 'ExecuteRequest').returns('');
+                sinon.stub(requestService, 'SendRequestGetResponseAsString').returns('');
 
                 report = new Report(helper, requestService, taskInput);
             });
