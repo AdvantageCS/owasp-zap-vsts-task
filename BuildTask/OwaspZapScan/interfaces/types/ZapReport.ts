@@ -9,10 +9,12 @@ export interface OwaspZapReport {
 }
 
 export interface Site {
-    name: string;
-    host: string;
-    port: string;
-    ssl: string;
+    $: {
+        name: string,
+        host: string,
+        port: string,
+        ssl: string,
+    };
     alerts: Alerts;
 }
 
