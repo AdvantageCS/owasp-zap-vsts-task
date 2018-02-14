@@ -41,7 +41,7 @@ export class Report {
         };
     }
 
-    GetScanResults(type: ReportType): Promise<string> {
+    GenerateReportOfType(type: ReportType): Promise<string> {
         let reportType: string = 'xmlreport';
 
         /* Set report type */
@@ -56,7 +56,7 @@ export class Report {
             Task.debug(`Active Scan Results | ZAP API Call: ${this._requestOptions.uri} | Request Options: ${JSON.stringify(this._requestOptions)}`);
         }
 
-        return this._requestService.ExecuteScanResultQuery(this._requestOptions);
+        return this._requestService.ExecuteRequest(this._requestOptions);
     }
 
     async GenerateReport(): Promise<boolean> {
@@ -87,14 +87,14 @@ export class Report {
 
         if (type === ReportType.HTML) {
             /* Get the Scan Result */
-            const xmlResult: string = await this.GetScanResults(ReportType.XML);
+            const xmlResult: string = await this.GenerateReportOfType(ReportType.XML);
             /* Sort and Count the Alerts */
             const processedAlerts: AlertResult = this._helper.ProcessAlerts(xmlResult, this._taskInputs.TargetUrl);
             /* Generate the Custom HTML Report */
             scanReport = this.createCustomHtmlReport(processedAlerts);
 
         } else {
-            scanReport = await this.GetScanResults(type);
+            scanReport = await this.GenerateReportOfType(type);
         }        
         
         /* Write the File */

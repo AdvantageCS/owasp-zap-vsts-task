@@ -1,3 +1,4 @@
+// tslint:disable-next-line:no-require-imports
 require('dotenv').config();
 import * as path from 'path';
 import * as fs from 'fs';
@@ -15,7 +16,8 @@ import { AlertResult } from './../OwaspZapScan/interfaces/types/AlertResult';
 
 describe('OWASP Zap Scan Verify ', () => {
     describe('When verifying scan results', () => {
-        let taskInput: TaskInput = new TaskInput();
+        // tslint:disable-next-line:mocha-no-side-effect-code
+        const taskInput: TaskInput = new TaskInput();
         taskInput.ZapApiKey = 'empty';
         taskInput.ZapApiUrl = 'empty';
         taskInput.TargetUrl = 'empty';
@@ -41,13 +43,13 @@ describe('OWASP Zap Scan Verify ', () => {
 
             // Stub RequestService
             requestService = new RequestService();                
-            sinon.stub(requestService, 'ExecuteScanResultQuery').returns('');
+            sinon.stub(requestService, 'ExecuteRequest').returns('');
 
             // Stub Report
             report = new Report(helper, requestService, taskInput);
-            let mdPath = path.join(__dirname, 'valid.xml');
+            const mdPath = path.join(__dirname, 'valid.xml');
             xmlString = fs.readFileSync(mdPath, 'utf8');
-            sinon.stub(report, 'GetScanResults').returns(xmlString);
+            sinon.stub(report, 'GenerateReportOfType').returns(xmlString);
             sinon.stub(report, 'PrintResult');
 
         });

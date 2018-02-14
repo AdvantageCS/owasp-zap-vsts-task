@@ -19,7 +19,7 @@ export class Verify {
 
     async Assert(): Promise<void> {
         /* Get the Scan Result */
-        const xmlReport: string = await this._reports.GetScanResults(ReportType.XML);
+        const xmlReport: string = await this._reports.GenerateReportOfType(ReportType.XML);
         /* Sort and Count the Alerts */
         const alertResult: AlertResult = this._helper.ProcessAlerts(xmlReport, this._taskInputs.TargetUrl);
 

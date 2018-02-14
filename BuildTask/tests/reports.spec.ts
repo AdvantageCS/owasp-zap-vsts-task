@@ -1,3 +1,4 @@
+// tslint:disable-next-line:no-require-imports
 require('dotenv').config();
 import * as path from 'path';
 import * as fs from 'fs';
@@ -13,9 +14,10 @@ import { AlertResult } from './../OwaspZapScan/interfaces/types/AlertResult';
 import { ReportType } from '../OwaspZapScan/enums/Enums';
 
 
-describe('OWASP Zap Scan Reports', function() {   
+describe('OWASP Zap Scan Reports', () => {   
     describe('When getting the active or spider scan result', () => {
-        let taskInput: TaskInput = new TaskInput();
+        // tslint:disable-next-line:mocha-no-side-effect-code
+        const taskInput: TaskInput = new TaskInput();
         taskInput.ZapApiKey = 'empty';
         taskInput.ZapApiUrl = 'empty';
         taskInput.TargetUrl = 'empty';
@@ -33,20 +35,20 @@ describe('OWASP Zap Scan Reports', function() {
                                 
                 // Stub RequestService
                 requestService = new RequestService();
-                let xmlPath = path.join(__dirname, 'valid.xml');
+                const xmlPath = path.join(__dirname, 'valid.xml');
                 xmlString = fs.readFileSync(xmlPath, 'utf8');
-                sinon.stub(requestService, 'ExecuteScanResultQuery').returns(xmlString);           
+                sinon.stub(requestService, 'ExecuteRequest').returns(xmlString);           
                 
                 report = new Report(helper, requestService, taskInput);
             });
     
             it('Should return a Promise of type string', () => {
-                const result = report.GetScanResults(ReportType.XML);
+                const result = report.GenerateReportOfType(ReportType.XML);
                 expect(result).toBeA('string');
             });
     
             it('Should contain XML content in the string', () => {
-                expect(report.GetScanResults(ReportType.XML)).toContain('<?xml version="1.0"?>');
+                expect(report.GenerateReportOfType(ReportType.XML)).toContain('<?xml version="1.0"?>');
             });
         });
     
@@ -59,20 +61,20 @@ describe('OWASP Zap Scan Reports', function() {
                             
                 // Stub RequestService
                 requestService = new RequestService();
-                let htmlPath = path.join(__dirname, 'valid.html');
+                const htmlPath = path.join(__dirname, 'valid.html');
                 htmlString = fs.readFileSync(htmlPath, 'utf8');
-                sinon.stub(requestService, 'ExecuteScanResultQuery').returns(htmlString);
+                sinon.stub(requestService, 'ExecuteRequest').returns(htmlString);
     
                 report = new Report(helper, requestService, taskInput);
             });
     
             it('Should return a Promise of type string', () => {
-                const result = report.GetScanResults(ReportType.HTML);
+                const result = report.GenerateReportOfType(ReportType.HTML);
                 expect(result).toBeA('string');
             });
     
             it('Should contain XML content in the string', () => {
-                expect(report.GetScanResults(ReportType.HTML)).toContain('<!DOCTYPE html>');
+                expect(report.GenerateReportOfType(ReportType.HTML)).toContain('<!DOCTYPE html>');
             });
         });
     
@@ -85,26 +87,27 @@ describe('OWASP Zap Scan Reports', function() {
                             
                 // Stub RequestService
                 requestService = new RequestService();
-                let mdPath = path.join(__dirname, 'valid.md');
+                const mdPath = path.join(__dirname, 'valid.md');
                 mdString = fs.readFileSync(mdPath, 'utf8');
-                sinon.stub(requestService, 'ExecuteScanResultQuery').returns(mdString);
+                sinon.stub(requestService, 'ExecuteRequest').returns(mdString);
     
                 report = new Report(helper, requestService, taskInput);
             });
     
             it('Should return a Promise of type string', () => {
-                const result = report.GetScanResults(ReportType.MD);
+                const result = report.GenerateReportOfType(ReportType.MD);
                 expect(result).toBeA('string');
             });
     
             it('Should contain XML content in the string', () => {
-                expect(report.GetScanResults(ReportType.MD)).toContain('#Zap Scan Report');
+                expect(report.GenerateReportOfType(ReportType.MD)).toContain('#Zap Scan Report');
             });
         });
     });
 
     describe('When generating the Scan Report', () => {
-        let taskInput: TaskInput = new TaskInput();
+        // tslint:disable-next-line:mocha-no-side-effect-code
+        const taskInput: TaskInput = new TaskInput();
         taskInput.ZapApiKey = 'empty';
         taskInput.ZapApiUrl = 'empty';
         taskInput.TargetUrl = 'empty';
@@ -137,9 +140,9 @@ describe('OWASP Zap Scan Reports', function() {
 
                     // Stub RequestService
                     requestService = new RequestService();
-                    let mdPath = path.join(__dirname, 'valid.xml');
+                    const mdPath = path.join(__dirname, 'valid.xml');
                     xmlString = fs.readFileSync(mdPath, 'utf8');
-                    sinon.stub(requestService, 'ExecuteScanResultQuery').returns(xmlString);
+                    sinon.stub(requestService, 'ExecuteRequest').returns(xmlString);
 
                     taskInput.ReportType = 'xml';
 
@@ -168,9 +171,9 @@ describe('OWASP Zap Scan Reports', function() {
 
                     // Stub RequestService
                     requestService = new RequestService();
-                    let mdPath = path.join(__dirname, 'valid.html');
+                    const mdPath = path.join(__dirname, 'valid.html');
                     xmlString = fs.readFileSync(mdPath, 'utf8');
-                    sinon.stub(requestService, 'ExecuteScanResultQuery').returns(xmlString);
+                    sinon.stub(requestService, 'ExecuteRequest').returns(xmlString);
 
                     taskInput.ReportType = 'html';
 
@@ -199,9 +202,9 @@ describe('OWASP Zap Scan Reports', function() {
 
                     // Stub RequestService
                     requestService = new RequestService();
-                    let mdPath = path.join(__dirname, 'valid.md');
+                    const mdPath = path.join(__dirname, 'valid.md');
                     xmlString = fs.readFileSync(mdPath, 'utf8');
-                    sinon.stub(requestService, 'ExecuteScanResultQuery').returns(xmlString);
+                    sinon.stub(requestService, 'ExecuteRequest').returns(xmlString);
 
                     taskInput.ReportType = 'md';
 
@@ -217,7 +220,8 @@ describe('OWASP Zap Scan Reports', function() {
 
     describe('When printing the Scan Report', () => {
         describe('When calling the PrintReport with arguments', () => {
-            let taskInput: TaskInput = new TaskInput();
+            // tslint:disable-next-line:mocha-no-side-effect-code
+            const taskInput: TaskInput = new TaskInput();
             taskInput.ZapApiKey = 'empty';
             taskInput.ZapApiUrl = 'empty';
             taskInput.TargetUrl = 'empty';
@@ -232,7 +236,7 @@ describe('OWASP Zap Scan Reports', function() {
 
                 // Stub RequestService
                 requestService = new RequestService();
-                sinon.stub(requestService, 'ExecuteScanResultQuery').returns('');
+                sinon.stub(requestService, 'ExecuteRequest').returns('');
 
                 report = new Report(helper, requestService, taskInput);
             });
