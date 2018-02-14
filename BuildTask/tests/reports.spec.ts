@@ -16,15 +16,17 @@ import { ReportType } from '../OwaspZapScan/enums/Enums';
 
 describe('OWASP Zap Scan Reports', () => {   
     describe('When getting the active or spider scan result', () => {
-        // tslint:disable-next-line:mocha-no-side-effect-code
-        const taskInput: TaskInput = new TaskInput();
-        taskInput.ZapApiKey = 'empty';
-        taskInput.ZapApiUrl = 'empty';
-        taskInput.TargetUrl = 'empty';
-
+        let taskInput: TaskInput;
         let report: Report;
         let helper: Helper;
         let requestService: RequestService;
+
+        before(() => {
+            taskInput = new TaskInput();
+            taskInput.ZapApiKey = 'empty';
+            taskInput.ZapApiUrl = 'empty';
+            taskInput.TargetUrl = 'empty';    
+        });
 
         describe('When GetScanResults is called with XML report type', () => {            
             let xmlString: string;
@@ -106,15 +108,17 @@ describe('OWASP Zap Scan Reports', () => {
     });
 
     describe('When generating the Scan Report', () => {
-        // tslint:disable-next-line:mocha-no-side-effect-code
-        const taskInput: TaskInput = new TaskInput();
-        taskInput.ZapApiKey = 'empty';
-        taskInput.ZapApiUrl = 'empty';
-        taskInput.TargetUrl = 'empty';
-
+        let taskInput: TaskInput;
         let report: Report;
         let helper: Helper;
         let requestService: RequestService;
+
+        before(() => {
+            taskInput = new TaskInput();
+            taskInput.ZapApiKey = 'empty';
+            taskInput.ZapApiUrl = 'empty';
+            taskInput.TargetUrl = 'empty';    
+        });
 
         describe('When GenerateReport is called with a report type and,', () => {
             beforeEach(() => {
@@ -220,16 +224,18 @@ describe('OWASP Zap Scan Reports', () => {
 
     describe('When printing the Scan Report', () => {
         describe('When calling the PrintReport with arguments', () => {
-            // tslint:disable-next-line:mocha-no-side-effect-code
-            const taskInput: TaskInput = new TaskInput();
-            taskInput.ZapApiKey = 'empty';
-            taskInput.ZapApiUrl = 'empty';
-            taskInput.TargetUrl = 'empty';
-    
+            let taskInput: TaskInput;
             let report: Report;
             let helper: Helper;
             let requestService: RequestService;
-
+    
+            before(() => {
+                taskInput = new TaskInput();
+                taskInput.ZapApiKey = 'empty';
+                taskInput.ZapApiUrl = 'empty';
+                taskInput.TargetUrl = 'empty';    
+            });
+    
             beforeEach(() => {
                 // Stub Helper
                 helper = new Helper();

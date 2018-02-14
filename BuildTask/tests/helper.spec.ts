@@ -1,3 +1,4 @@
+// tslint:disable-next-line:no-require-imports
 require('dotenv').config();
 import * as path from 'path';
 import * as fs from 'fs';
@@ -6,10 +7,10 @@ import * as expect from 'expect';
 import { Helper } from '../OwaspZapScan/classes/Helper';
 import { AlertResult } from './../OwaspZapScan/interfaces/types/AlertResult';
 
-describe('OWASP Zap Scan Helpers', function() {
+describe('OWASP Zap Scan Helpers', () => {
     describe('When a valid xmlReport and a url is passed, the helper', () => {
         it('Should not be undefined or null', () => {            
-            let helper = new Helper();
+            const helper = new Helper();
             expect(helper).toNotBe(undefined).toNotBe(null);
         });
     });
@@ -18,12 +19,14 @@ describe('OWASP Zap Scan Helpers', function() {
         let helper: Helper;
         let xmlString: string;
         let result: AlertResult;
+        // tslint:disable-next-line:no-http-string
         const validTargetUrl: string = 'http://k2vowasptestsite.azurewebsites.net';
+        // tslint:disable-next-line:no-http-string
         const invalidTargetUrl: string = 'http://k2vowasptestsite-invalid.azurewebsites.net';
     
         before(() => {
             helper = new Helper();
-            let xmlPath = path.join(__dirname, 'valid.xml');
+            const xmlPath = path.join(__dirname, 'valid.xml');
             xmlString = fs.readFileSync(xmlPath, 'utf8');
             result = helper.ProcessAlerts(xmlString, validTargetUrl);
         });
@@ -65,11 +68,12 @@ describe('OWASP Zap Scan Helpers', function() {
         let helper: Helper;
         let xmlString: string;
         let result: AlertResult;
+        // tslint:disable-next-line:no-http-string
         const invalidTargetUrl: string = 'http://k2vowasptestsite-invalid.azurewebsites.net';
     
         before(() => {
             helper = new Helper();
-            let xmlPath = path.join(__dirname, 'valid.xml');
+            const xmlPath = path.join(__dirname, 'valid.xml');
             xmlString = fs.readFileSync(xmlPath, 'utf8');
             result = helper.ProcessAlerts(xmlString, invalidTargetUrl);
         });
@@ -111,11 +115,12 @@ describe('OWASP Zap Scan Helpers', function() {
         let helper: Helper;
         let xmlString: string;
         let result: AlertResult;
+        // tslint:disable-next-line:no-http-string
         const validTargetUrl: string = 'http://k2vowasptestsite.azurewebsites.net';
     
         before(() => {
             helper = new Helper();
-            let xmlPath = path.join(__dirname, 'invalid.xml');
+            const xmlPath = path.join(__dirname, 'invalid.xml');
             xmlString = fs.readFileSync(xmlPath, 'utf8');
             result = helper.ProcessAlerts(xmlString, validTargetUrl);
         });
