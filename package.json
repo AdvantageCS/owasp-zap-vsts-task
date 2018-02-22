@@ -56,11 +56,11 @@
     }
   },
   "dependencies": {
-    "request": "^2.81.0",
+    "request": "^2.83.0",
     "request-promise": "^4.2.1",
     "thread-sleep": "^2.0.0",
     "vsts-task-lib": "^2.1.0",
-    "xmljson": "^0.2.0"
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.10",
@@ -71,6 +71,7 @@
     "@types/request": "^2.0.0",
     "@types/request-promise": "^4.1.36",
     "@types/sinon": "^2.3.3",
+    "@types/xml2js": "^0.4.2",
     "commitizen": "^2.9.6",
     "copyfiles": "^1.2.0",
     "coveralls": "^2.13.1",

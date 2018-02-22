@@ -2,8 +2,8 @@
     "$schema": "https://raw.githubusercontent.com/AArnott/vso-agent-tasks/9b41d803a/tasks.schema.json",
     "id": "ef7656a8-2446-483a-b9e7-b234d09476b8",
     "name": "OwaspZapScan",
-    "friendlyName": "AdvantageCS OWASP Zed Attack Proxy Scan",
-    "description": "Visual Studio Team Services build/release task for running OWASP ZAP automated security tests",
+    "friendlyName": "Card Vault OWASP Zed Attack Proxy Scan",
+    "description": "Visual Studio Team Services build/release task for running OWASP ZAP automated security tests on Card Vault",
     "helpMarkDown": "[More Information](https://github.com/AdvantageCS/owasp-zap-vsts-task)",
     "category": "Test",
     "visibility": [
@@ -15,10 +15,10 @@
         "MachineGroup",
         "Server"
     ],
-    "author": "AdvantageCS (forked from Kasun Kodagoda)",
+    "author": "AdvantageCS",
     "version": {
         "Major": 1,
-        "Minor": 57,
+        "Minor": 58,
         "Patch": 1
     },
     "demands": [
@@ -27,19 +27,14 @@
     "minimumAgentVersion": "1.92.0",
     "groups": [
         {
-            "name": "apiConfiguration",
-            "displayName": "ZAP API Configuration",
+            "name": "scanOptions",
+            "displayName": "ZAP Scan Options",
             "isExpanded": true
         },
         {
-            "name": "spiderScanOptions",
-            "displayName": "Spider Scan Options",
+            "name": "authOptions",
+            "displayName": "Card Vault Authentication",
             "isExpanded": true
-        },
-        {
-            "name": "activeScanOptions",
-            "displayName": "Active Scan Options",
-            "isExpanded": false
         },
         {
             "name": "verificationConfig",
@@ -54,27 +49,11 @@
     ],
     "inputs": [
         {
-            "name": "ZapApiUrl",
-            "type": "string",
-            "label": "ZAP API Url",
-            "required": true,
-            "groupName": "apiConfiguration",
-            "helpMarkDown": "The fully qualified domain name (FQDN) with out the protocol. _(Eg. zap.example.com)_"
-        },
-        {
-            "name": "ZapApiKey",
-            "type": "string",
-            "label": "API Key",
-            "required": true,
-            "groupName": "apiConfiguration",
-            "helpMarkDown": "The API key for ZAP. Details about obtaining the API can be found [here](https://github.com/zaproxy/zaproxy/wiki/FAQapikey)"
-        },
-        {
             "name": "TargetUrl",
             "type": "string",
             "label": "Target URL",
             "required": true,
-            "groupName": "apiConfiguration",
+            "groupName": "scanOptions",
             "helpMarkDown": "Target URL where the active scan is performed against."
         },
         {
@@ -82,42 +61,15 @@
             "type": "boolean",
             "label": "Execute Spider",
             "required": false,
-            "groupName": "spiderScanOptions",
+            "groupName": "scanOptions",
             "helpMarkDown": "Enable to run a spider scan on the target."
-        },
-        {
-            "name": "RecurseSpider",
-            "type": "boolean",
-            "label": "Recurse",
-            "required": false,
-            "groupName": "spiderScanOptions",
-            "helpMarkDown": "Enable to use the nodes underneath the one specified target to seed the spider.",
-            "visibleRule": "ExecuteSpiderScan = true"
-        },
-        {
-            "name": "SubtreeOnly",
-            "type": "boolean",
-            "label": "Subtree Only",
-            "required": false,
-            "groupName": "spiderScanOptions",
-            "helpMarkDown": "Enable to restrict the spider under the target url subtree.",
-            "visibleRule": "ExecuteSpiderScan = true"
-        },
-        {
-            "name": "ContextName",
-            "type": "string",
-            "label": "Context Name",
-            "required": false,
-            "groupName": "spiderScanOptions",
-            "helpMarkDown": "Set to constrain the scan to a Context.",
-            "visibleRule": "ExecuteSpiderScan = true"
         },
         {
             "name": "MaxChildrenToCrawl",
             "type": "string",
             "label": "Max Children To Crawl",
             "required": false,
-            "groupName": "spiderScanOptions",
+            "groupName": "scanOptions",
             "helpMarkDown": "Set to limit the number of children scanned.",
             "visibleRule": "ExecuteSpiderScan = true"
         },
@@ -126,67 +78,49 @@
             "type": "boolean",
             "label": "Execute Active Scan",
             "required": false,
-            "groupName": "activeScanOptions",
+            "groupName": "scanOptions",
             "helpMarkDown": "Enable to run a active scan on the target."
-        },
-        {
-            "name": "ContextId",
-            "type": "string",
-            "label": "Context ID",
-            "required": false,
-            "groupName": "activeScanOptions",
-            "helpMarkDown": "Context identifier of the Scan context",
-            "visibleRule": "ExecuteActiveScan = true"
-        },
-        {
-            "name": "Recurse",
-            "type": "boolean",
-            "label": "Recurse",
-            "defaultValue": "true",
-            "required": false,
-            "groupName": "activeScanOptions",
-            "helpMarkDown": "Set recurse option to scan URLs under the given target URL",
-            "visibleRule": "ExecuteActiveScan = true"
-        },
-        {
-            "name": "InScopeOnly",
-            "type": "boolean",
-            "label": "In Scope Only",
-            "required": false,
-            "groupName": "activeScanOptions",
-            "helpMarkDown": "Set In Scope only to true to constrain the scan to URLs that are in scope (ignored if a Context is specified)",
-            "visibleRule": "ExecuteActiveScan = true"
         },
         {
             "name": "ScanPolicyName",
             "type": "string",
             "label": "Scan Policy Name",
             "required": false,
-            "groupName": "activeScanOptions",
+            "groupName": "scanOptions",
             "helpMarkDown": "Scan Policy Name allows to specify the scan policy (if none is given it uses the default scan policy)",
             "visibleRule": "ExecuteActiveScan = true"
         },
         {
-            "name": "Method",
+            "name": "AuthClientId",
             "type": "string",
-            "label": "Method",
-            "required": false,
-            "groupName": "activeScanOptions",
-            "helpMarkDown": "Allow you to select a given request in conjunction with the given URL",
-            "visibleRule": "ExecuteActiveScan = true"
+            "label": "Client ID",
+            "required": true,
+            "groupName": "authOptions",
+            "helpMarkDown": "The client_id to use in the Card Vault API token request"
         },
         {
-            "name": "PostData",
-            "type": "multiLine",
-            "label": "POST Data",
-            "required": false,
-            "groupName": "activeScanOptions",
-            "helpMarkDown": "Allow you to select a given request in conjunction with the given URL",
-            "visibleRule": "ExecuteActiveScan = true",
-            "properties": {
-                "resizable": true,
-                "rows" : "10"
-            }
+            "name": "AuthClientSecret",
+            "type": "string",
+            "label": "Client Secret",
+            "required": true,
+            "groupName": "authOptions",
+            "helpMarkDown": "The client secret to use in the Card Vault API token request"
+        },
+        {
+            "name": "WindowsUsername",
+            "type": "string",
+            "label": "Windows Username",
+            "required": true,
+            "groupName": "authOptions",
+            "helpMarkDown": "The windows username to use when browsing the Card Vault Admin UI"
+        },
+        {
+            "name": "WindowsPassword",
+            "type": "string",
+            "label": "Password",
+            "required": true,
+            "groupName": "authOptions",
+            "helpMarkDown": "The windows password to use when browsing the Card Vault Admin UI"
         },
         {
             "name": "EnableVerifications",

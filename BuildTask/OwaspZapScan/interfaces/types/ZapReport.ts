@@ -15,7 +15,7 @@ export interface Site {
         port: string,
         ssl: string,
     };
-    alerts: Alerts;
+    alerts: Array<Alerts>;
 }
 
 export interface Alerts {
@@ -23,21 +23,21 @@ export interface Alerts {
 }
 
 export interface AlertItem {
-    pluginid: string;
-    alert: string;
-    name: string;
-    riskcode: string;
-    confidence: string;
-    riskdesc: string;
-    desc: string;
-    instances: InstanceList;
-    count: string;
-    solution: string;
-    reference: string;
-    cweid: string;
-    wascid: string;
-    sourceid: string;
-    otherinfo: string;
+    pluginid: Array<string>;
+    alert: Array<string>;
+    name: Array<string>;
+    riskcode: Array<string>;
+    confidence: Array<string>;
+    riskdesc: Array<string>;
+    desc: Array<string>;
+    instances: Array<InstanceList>;
+    count: Array<string>;
+    solution: Array<string>;
+    reference: Array<string>;
+    cweid: Array<string>;
+    wascid: Array<string>;
+    sourceid: Array<string>;
+    otherinfo: Array<string>;
 }
 
 export interface InstanceList {
@@ -45,9 +45,9 @@ export interface InstanceList {
 }
 
 export interface Instance {
-    uri: string;
-    method: string;
-    evidence: string;
-    param: string;
-    attack: string;
+    uri: Array<string>;
+    method: Array<string>;
+    evidence: Array<string>;
+    param: Array<string>;
+    attack: Array<string>;
 }

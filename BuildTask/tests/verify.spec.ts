@@ -18,8 +18,6 @@ describe('OWASP Zap Scan Verify ', () => {
     describe('When verifying scan results', () => {
         // tslint:disable-next-line:mocha-no-side-effect-code
         const taskInput: TaskInput = new TaskInput();
-        taskInput.ZapApiKey = 'empty';
-        taskInput.ZapApiUrl = 'empty';
         taskInput.TargetUrl = 'empty';
 
         let report: Report;
@@ -39,18 +37,18 @@ describe('OWASP Zap Scan Verify ', () => {
                 InformationalAlerts: 3,
                 Alerts: Array<AlertItem>()
             };
-            sinon.stub(helper, 'ProcessAlerts').returns(alertResults);
+            sinon.stub(helper, 'processAlerts').returns(alertResults);
 
             // Stub RequestService
-            requestService = new RequestService();                
-            sinon.stub(requestService, 'SendRequestGetResponseAsString').returns('');
+            requestService = new RequestService('localhost', 8090);                
+            sinon.stub(requestService, 'sendRequestGetResponseAsString').returns('');
 
             // Stub Report
             report = new Report(helper, requestService, taskInput);
             const mdPath = path.join(__dirname, 'valid.xml');
             xmlString = fs.readFileSync(mdPath, 'utf8');
-            sinon.stub(report, 'GenerateReportOfType').returns(xmlString);
-            sinon.stub(report, 'PrintResult');
+            sinon.stub(report, 'generateReportOfType').returns(xmlString);
+            sinon.stub(report, 'printResult');
 
         });
         
@@ -63,7 +61,7 @@ describe('OWASP Zap Scan Verify ', () => {
             it('Should not run verification when its not enabled', () => {
                 taskInput.EnableVerifications = true;                
                 verify = new Verify(helper, report, taskInput);
-                expect(verify.Assert());
+                expect(verify.assert());
             });
 
             it('Should run verification when its enabled and fail', () => {
@@ -73,7 +71,7 @@ describe('OWASP Zap Scan Verify ', () => {
                 taskInput.MaxLowRiskAlerts = 2;                
 
                 verify = new Verify(helper, report, taskInput);
-                expect(verify.Assert());
+                expect(verify.assert());
             });
 
             it('Should run verification when its enabled and pass', () => {
@@ -83,7 +81,7 @@ describe('OWASP Zap Scan Verify ', () => {
                 taskInput.MaxLowRiskAlerts = 5;                
 
                 verify = new Verify(helper, report, taskInput);
-                expect(verify.Assert());
+                expect(verify.assert());
             });
 
         });

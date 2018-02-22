@@ -17,11 +17,11 @@ export class Verify {
         this._reports = report;        
     }
 
-    async Assert(): Promise<void> {
+    async assert(): Promise<void> {
         /* Get the Scan Result */
-        const xmlReport: string = await this._reports.GenerateReportOfType(ReportType.XML);
+        const xmlReport: string = await this._reports.generateReportOfType(ReportType.XML);
         /* Sort and Count the Alerts */
-        const alertResult: AlertResult = this._helper.ProcessAlerts(xmlReport, this._taskInputs.TargetUrl);
+        const alertResult: AlertResult = this._helper.processAlerts(xmlReport, this._taskInputs.TargetUrl);
 
         /* istanbul ignore if */
         if (process.env.NODE_ENV !== 'test') {
@@ -34,7 +34,7 @@ export class Verify {
         }        
         
         /* Print the Scan Report */
-        this._reports.PrintResult(alertResult.HighAlerts, alertResult.MediumAlerts, alertResult.LowAlerts, alertResult.InformationalAlerts);
+        this._reports.printResult(alertResult.HighAlerts, alertResult.MediumAlerts, alertResult.LowAlerts, alertResult.InformationalAlerts);
         
         /* If Verifications are enabled. */
         if (this._taskInputs.EnableVerifications) {           

@@ -23,8 +23,6 @@ describe('OWASP Zap Scan Reports', () => {
 
         before(() => {
             taskInput = new TaskInput();
-            taskInput.ZapApiKey = 'empty';
-            taskInput.ZapApiUrl = 'empty';
             taskInput.TargetUrl = 'empty';    
         });
 
@@ -36,21 +34,21 @@ describe('OWASP Zap Scan Reports', () => {
                 helper = new Helper();
                                 
                 // Stub RequestService
-                requestService = new RequestService();
+                requestService = new RequestService('localhost', 8090);
                 const xmlPath = path.join(__dirname, 'valid.xml');
                 xmlString = fs.readFileSync(xmlPath, 'utf8');
-                sinon.stub(requestService, 'SendRequestGetResponseAsString').returns(xmlString);           
+                sinon.stub(requestService, 'sendRequestGetResponseAsString').returns(xmlString);           
                 
                 report = new Report(helper, requestService, taskInput);
             });
     
             it('Should return a Promise of type string', () => {
-                const result = report.GenerateReportOfType(ReportType.XML);
+                const result = report.generateReportOfType(ReportType.XML);
                 expect(result).toBeA('string');
             });
     
             it('Should contain XML content in the string', () => {
-                expect(report.GenerateReportOfType(ReportType.XML)).toContain('<?xml version="1.0"?>');
+                expect(report.generateReportOfType(ReportType.XML)).toContain('<?xml version="1.0"?>');
             });
         });
     
@@ -62,21 +60,21 @@ describe('OWASP Zap Scan Reports', () => {
                 helper = new Helper();
                             
                 // Stub RequestService
-                requestService = new RequestService();
+                requestService = new RequestService('localhost', 8090);
                 const htmlPath = path.join(__dirname, 'valid.html');
                 htmlString = fs.readFileSync(htmlPath, 'utf8');
-                sinon.stub(requestService, 'SendRequestGetResponseAsString').returns(htmlString);
+                sinon.stub(requestService, 'sendRequestGetResponseAsString').returns(htmlString);
     
                 report = new Report(helper, requestService, taskInput);
             });
     
             it('Should return a Promise of type string', () => {
-                const result = report.GenerateReportOfType(ReportType.HTML);
+                const result = report.generateReportOfType(ReportType.HTML);
                 expect(result).toBeA('string');
             });
     
             it('Should contain XML content in the string', () => {
-                expect(report.GenerateReportOfType(ReportType.HTML)).toContain('<!DOCTYPE html>');
+                expect(report.generateReportOfType(ReportType.HTML)).toContain('<!DOCTYPE html>');
             });
         });
     
@@ -88,21 +86,21 @@ describe('OWASP Zap Scan Reports', () => {
                 helper = new Helper();
                             
                 // Stub RequestService
-                requestService = new RequestService();
+                requestService = new RequestService('localhost', 8090);
                 const mdPath = path.join(__dirname, 'valid.md');
                 mdString = fs.readFileSync(mdPath, 'utf8');
-                sinon.stub(requestService, 'SendRequestGetResponseAsString').returns(mdString);
+                sinon.stub(requestService, 'sendRequestGetResponseAsString').returns(mdString);
     
                 report = new Report(helper, requestService, taskInput);
             });
     
             it('Should return a Promise of type string', () => {
-                const result = report.GenerateReportOfType(ReportType.MD);
+                const result = report.generateReportOfType(ReportType.MD);
                 expect(result).toBeA('string');
             });
     
             it('Should contain XML content in the string', () => {
-                expect(report.GenerateReportOfType(ReportType.MD)).toContain('#Zap Scan Report');
+                expect(report.generateReportOfType(ReportType.MD)).toContain('#Zap Scan Report');
             });
         });
     });
@@ -115,8 +113,6 @@ describe('OWASP Zap Scan Reports', () => {
 
         before(() => {
             taskInput = new TaskInput();
-            taskInput.ZapApiKey = 'empty';
-            taskInput.ZapApiUrl = 'empty';
             taskInput.TargetUrl = 'empty';    
         });
 
@@ -140,13 +136,13 @@ describe('OWASP Zap Scan Reports', () => {
                         InformationalAlerts: 0,
                         Alerts: Array<AlertItem>()
                     };
-                    sinon.stub(helper, 'ProcessAlerts').returns(alertResults);
+                    sinon.stub(helper, 'processAlerts').returns(alertResults);
 
                     // Stub RequestService
-                    requestService = new RequestService();
+                    requestService = new RequestService('localhost', 8090);
                     const mdPath = path.join(__dirname, 'valid.xml');
                     xmlString = fs.readFileSync(mdPath, 'utf8');
-                    sinon.stub(requestService, 'SendRequestGetResponseAsString').returns(xmlString);
+                    sinon.stub(requestService, 'sendRequestGetResponseAsString').returns(xmlString);
 
                     taskInput.ReportType = 'xml';
 
@@ -171,13 +167,13 @@ describe('OWASP Zap Scan Reports', () => {
                         InformationalAlerts: 0,
                         Alerts: Array<AlertItem>()
                     };
-                    sinon.stub(helper, 'ProcessAlerts').returns(alertResults);
+                    sinon.stub(helper, 'processAlerts').returns(alertResults);
 
                     // Stub RequestService
-                    requestService = new RequestService();
+                    requestService = new RequestService('localhost', 8090);
                     const mdPath = path.join(__dirname, 'valid.html');
                     xmlString = fs.readFileSync(mdPath, 'utf8');
-                    sinon.stub(requestService, 'SendRequestGetResponseAsString').returns(xmlString);
+                    sinon.stub(requestService, 'sendRequestGetResponseAsString').returns(xmlString);
 
                     taskInput.ReportType = 'html';
 
@@ -202,13 +198,13 @@ describe('OWASP Zap Scan Reports', () => {
                         InformationalAlerts: 0,
                         Alerts: Array<AlertItem>()
                     };
-                    sinon.stub(helper, 'ProcessAlerts').returns(alertResults);
+                    sinon.stub(helper, 'processAlerts').returns(alertResults);
 
                     // Stub RequestService
-                    requestService = new RequestService();
+                    requestService = new RequestService('localhost', 8090);
                     const mdPath = path.join(__dirname, 'valid.md');
                     xmlString = fs.readFileSync(mdPath, 'utf8');
-                    sinon.stub(requestService, 'SendRequestGetResponseAsString').returns(xmlString);
+                    sinon.stub(requestService, 'sendRequestGetResponseAsString').returns(xmlString);
 
                     taskInput.ReportType = 'md';
 
@@ -231,8 +227,6 @@ describe('OWASP Zap Scan Reports', () => {
     
             before(() => {
                 taskInput = new TaskInput();
-                taskInput.ZapApiKey = 'empty';
-                taskInput.ZapApiUrl = 'empty';
                 taskInput.TargetUrl = 'empty';    
             });
     
@@ -241,14 +235,14 @@ describe('OWASP Zap Scan Reports', () => {
                 helper = new Helper();
 
                 // Stub RequestService
-                requestService = new RequestService();
-                sinon.stub(requestService, 'SendRequestGetResponseAsString').returns('');
+                requestService = new RequestService('localhost', 8090);
+                sinon.stub(requestService, 'sendRequestGetResponseAsString').returns('');
 
                 report = new Report(helper, requestService, taskInput);
             });
 
             it('Should print the result', () => {
-                expect(report.PrintResult(0, 0, 0, 0));
+                expect(report.printResult(0, 0, 0, 0));
             });
         });
     });

@@ -4,6 +4,8 @@ dist/
 coverage/
 spec/
 *.js
+!oauth-authentication.js
+!oauth-httpsender.js
 *.vsix
 *.log
 *.map

@@ -1,33 +1,4 @@
 export class TaskInput {
-    /* Required */
-    private _zapApiKey: string | undefined;
-    set ZapApiKey(value: string) {
-        this._zapApiKey = value;
-    }
-
-    get ZapApiKey(): string {
-        if (this._zapApiKey) {
-            return this._zapApiKey;
-        }
-        /* istanbul ignore next */
-        throw new Error('The ZAP API Key is required but not set.');
-    }
-
-
-    private _zapApiUrl: string | undefined;
-    set ZapApiUrl(value: string) {
-        this._zapApiUrl = value;
-    }
-    
-    get ZapApiUrl(): string {
-        if (this._zapApiUrl) {
-            return this._zapApiUrl;
-        }
-        /* istanbul ignore next */
-        throw new Error('The ZAP API URL is required but not set.');
-    }
-
-    
     private _targetUrl: string | undefined;
     set TargetUrl(value: string) {
         this._targetUrl = value;
@@ -51,27 +22,7 @@ export class TaskInput {
     get ExecuteSpiderScan(): boolean {
         return this._executeSpiderScan;
     }
-
-
-    private _recurseSpider: boolean = false;
-    set RecurseSpider(value: boolean) {
-        this._recurseSpider = value;
-    }
-
-    get RecurseSpider(): boolean {
-        return this._recurseSpider;
-    }
-    
-    
-    private _subTreeOnly: boolean = false;
-    set SubTreeOnly(value: boolean) {
-        this._subTreeOnly = value;
-    }
-
-    get SubTreeOnly(): boolean {
-        return this._subTreeOnly;
-    }
-    
+        
     
     private _maxChildrenToCrawl: string = '';
     set MaxChildrenToCrawl(value: string) {
@@ -80,16 +31,6 @@ export class TaskInput {
 
     get MaxChildrenToCrawl(): string {
         return this._maxChildrenToCrawl;
-    }
-
-
-    private _contextName: string = '';
-    set ContextName(value: string) {
-        this._contextName = value;
-    }
-
-    get ContextName(): string {
-        return this._contextName;
     }
 
 
@@ -104,36 +45,6 @@ export class TaskInput {
     }
 
 
-    private _contextId: string = '';
-    set ContextId(value: string) {
-        this._contextId = value;
-    }
-
-    get ContextId(): string {
-        return this._contextId;
-    }
-
-
-    private _recurse: boolean = false;
-    set Recurse(value: boolean) {
-        this._recurse = value;
-    }
-
-    get Recurse(): boolean {
-        return this._recurse;
-    }
-
-
-    private _inScopeOnly: boolean = false;
-    set InScopeOnly(value: boolean) {
-        this._inScopeOnly = value;
-    }
-
-    get InScopeOnly(): boolean {
-        return this._inScopeOnly;
-    }
-
-
     private _scanPolicyName: string = '';
     set ScanPolicyName(value: string) {
         this._scanPolicyName = value;
@@ -142,27 +53,6 @@ export class TaskInput {
     get ScanPolicyName(): string {
         return this._scanPolicyName;
     }
-
-
-    private _method: string = '';
-    set Method(value: string) {
-        this._method = value;
-    }
-
-    get Method(): string {
-        return this._method;
-    }
-
-
-    private _postData: string = '';
-    set PostData(value: string) {
-        this._postData = value;
-    }
-
-    get PostData(): string {
-        return this._postData;
-    }
-
 
     
     /* Reporting */
@@ -215,6 +105,39 @@ export class TaskInput {
         return this._buildDefinitionName;
     }
 
+
+    /* Authentication */
+    private _authClientId: string = '';
+    set AuthClientId(value: string) {
+        this._authClientId = value;
+    }
+    get AuthClientId(): string {
+        return this._authClientId;
+    }
+
+    private _authClientSecret: string = '';
+    set AuthClientSecret(value: string) {
+        this._authClientSecret = value;
+    }
+    get AuthClientSecret(): string {
+        return this._authClientSecret;
+    }
+
+    private _windowsUsername: string = '';
+    set WindowsUsername(value: string) {
+        this._windowsUsername = value;
+    }
+    get WindowsUsername(): string {
+        return this._windowsUsername;
+    }
+
+    private _windowsPassword: string = '';
+    set WindowsPassword(value: string) {
+        this._windowsPassword = value;
+    }
+    get WindowsPassword(): string {
+        return this._windowsPassword;
+    }
 
 
     /* Verification */

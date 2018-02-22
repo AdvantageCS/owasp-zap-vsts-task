@@ -1,9 +1,9 @@
 {
     "manifestVersion": 1,
-    "id": "advantagecs-owasp-zap-scan",
-    "name": "AdvantageCS OWASP Zed Attack Proxy Scan",
+    "id": "card-vault-owasp-zap-scan",
+    "name": "Card Vault OWASP Zed Attack Proxy Scan",
     "publisher": "AdvantageCS",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
@@ -72,7 +72,7 @@
     ],
     "contributions": [
         {
-            "id": "owasp-zap-scan",
+            "id": "card-vault-owasp-zap-scan",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"

@@ -33,9 +33,6 @@ This configuration section includes the parameters that need to be sent to perfo
 
 ### Available Options
 * **Execute Spider Scan** : Enable to run a spider scan on the target.
-* **Recurse** : _(Optional)_ Enable to use the nodes underneath the one specified target to seed the spider.
-* **Subtree Only** : _(Optional)_ Enable to restrict the spider under the target url subtree.
-* **Context Name** : _(Optional)_ Set to constrain the scan to a Context.
 * **Max Children To Crawl** : _(Optional)_ Set to limit the number of children scanned.
 
 ## Active Scan Options
@@ -45,12 +42,8 @@ This configuration section includes the parameters that need to be sent to perfo
 
 ### Available Options
 * **Execute Active Scan** : Enable to run a active scan on the target.
-* **Context ID** : _(Optional)_ Context identifier of the Scan context.
-* **Recurse** : _(Optional)_ Set recurse option to scan URLs under the given target URL.
 * **In Scope Only** : _(Optional)_ Set In Scope only to true to constrain the scan to URLs that are in scope (ignored if a Context is specified).
 * **Scan Policy Name** : _(Optional)_ Scan Policy Name allows to specify the scan policy (if none is given it uses the default scan policy).
-* **Method** : _(Optional)_ Allow you to select a given request in conjunction with the given URL.
-* **POST Data** : _(Optional)_ Allow you to select a given request in conjunction with the given URL.
 
 
 ## Configure Verification

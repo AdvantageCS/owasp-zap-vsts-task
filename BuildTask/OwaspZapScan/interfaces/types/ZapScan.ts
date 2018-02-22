@@ -2,7 +2,6 @@
 
 export interface ZapRequestOptionsBase {
     formMethod: string;
-    apikey: string;
 }
 
 export interface ZapScanOptionsBase extends ZapRequestOptionsBase {
@@ -27,19 +26,18 @@ export interface ZapSpiderScanOptions extends ZapScanOptionsBase {
     subtreeOnly?: string;
 }
 
-export interface ZapScanStatusOptions extends ZapScanOptionsBase {
-    scanId: number;
-}
-
-export interface ZapNewContextOptions extends ZapRequestOptionsBase {
-    zapapiformat: string;
-    contextName: number;
-}
-
 export interface ZapScanStatus {
     status: number;
 }
 
 export interface ZapScanResult {
     scan: number;
+}
+
+export interface ViewUrlsResult {
+    urls: Array<string>;
+}
+
+export interface OpenApiImportResult {
+    importUrl: Array<string>;
 }

@@ -25,17 +25,16 @@
             "name": "Launch Program",
             "program": "${workspaceFolder}\\dist\\BuildTask\\OwaspZapScan\\owaspzapscan.js",
             "env": {
-                "INPUT_ZapApiUrl": "localhost:8090",
-                "INPUT_ZapApiKey": "lgcum95ipph9pubhnbthjq37bs",
-                "INPUT_TargetUrl": "https://localhost/card-vault/admin",
+                "INPUT_TargetUrl": "https://localhost/card-vault",
                 "INPUT_ExecuteSpiderScan": "true",
-                "INPUT_RecurseSpider": "true",
-                "INPUT_SubtreeOnly": "true",
+                "INPUT_MaxChildrenToCrawl": "",
                 "INPUT_ExecuteActiveScan": "true",
-                "INPUT_Recurse": "true",
                 "INPUT_ReportType": "html",
                 "INPUT_ReportFileDestination": "c:\\temp",
-                "INPUT_ReportFileName": "owasp-scan"
+                "INPUT_ReportFileName": "owasp-scan",
+                "INPUT_EnableVerifications": "true",
+                "INPUT_MaxHighRiskAlerts": "0",
+                "INPUT_MaxMediumRiskAlerts": "0"
             },
             "outFiles": [
                 "${workspaceFolder}/**/*.js"

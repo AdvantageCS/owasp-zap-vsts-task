@@ -1,5 +1,5 @@
 require('dotenv').config();
-import * as expect from 'expect'
+import * as expect from 'expect';
 
 import { TaskInput } from './../OwaspZapScan/classes/TaskInput';
 
@@ -11,64 +11,20 @@ describe('OWASP Zap Scan Inputs', () => {
             taskInput = new TaskInput();
         });
 
-        xit('Should throw an exception when ZapApiUrl is called', () => {
-            expect(taskInput.ZapApiUrl).toThrow(new Error('The ZAP API URL is required but not set.'));
-        });
-
-        xit('Should throw an exception when ZapApiKey is called', () => {
-            expect(taskInput.ZapApiKey).toThrow(new Error('The ZAP API Key is required but not set.'));
-        });
-
-        xit('Should throw an exception when ZapApiUrl is called', () => {
-            expect(taskInput.TargetUrl).toThrow(new Error('The Target URL is required but not set.'));
-        });
-
         it('Should return false when ExecuteSpiderScan is called', () => {
             expect(taskInput.ExecuteSpiderScan).toBeFalsy();
-        });
-
-        it('Should return false when RecurseSpider is called', () => {
-            expect(taskInput.RecurseSpider).toBeFalsy();
-        });
-
-        it('Should return false when SubTreeOnly is called', () => {
-            expect(taskInput.SubTreeOnly).toBeFalsy();
         });
 
         it('Should return empty string when MaxChildrenToCrawl is called', () => {
             expect(taskInput.MaxChildrenToCrawl).toEqual('');
         });
 
-        it('Should return empty string when ContextName is called', () => {
-            expect(taskInput.ContextName).toEqual('');
-        });
-
         it('Should return false when ExecuteActiveScan is called', () => {
             expect(taskInput.ExecuteActiveScan).toBeFalsy();
         });
 
-        it('Should return empty string when ContextId is called', () => {
-            expect(taskInput.ContextId).toEqual('');
-        });
-
-        it('Should return false when Recurse is called', () => {
-            expect(taskInput.Recurse).toBeFalsy();
-        });
-
-        it('Should return false when InScopeOnly is called', () => {
-            expect(taskInput.InScopeOnly).toBeFalsy();
-        });
-
         it('Should return empty string when ScanPolicyName is called', () => {
             expect(taskInput.ScanPolicyName).toEqual('');
-        });
-
-        it('Should return empty string when Method is called', () => {
-            expect(taskInput.Method).toEqual('');
-        });
-
-        it('Should return empty string when PostData is called', () => {
-            expect(taskInput.PostData).toEqual('');
         });
 
         it('Should return empty string when ReportType is called', () => {
@@ -114,25 +70,16 @@ describe('OWASP Zap Scan Inputs', () => {
 
         beforeEach(() => {
             taskInput = new TaskInput();
-            taskInput.ZapApiUrl = 'zap.k2vsoftware.com';
-            taskInput.ZapApiKey = 'xxxxxxxxxxxxx';
+            // tslint:disable-next-line:no-http-string
             taskInput.TargetUrl = 'http://example.com';
         
             /* Spider Scan Options */
             taskInput.ExecuteSpiderScan = true;
-            taskInput.RecurseSpider = true;
-            taskInput.SubTreeOnly = true;
             taskInput.MaxChildrenToCrawl = '5';
-            taskInput.ContextName = 'text-context';
             
             /* Active Scan Options inputs */
             taskInput.ExecuteActiveScan = true;
-            taskInput.ContextId = '1';
-            taskInput.Recurse = true;
-            taskInput.InScopeOnly = true;
             taskInput.ScanPolicyName = 'policy-name';
-            taskInput.Method = 'method';
-            taskInput.PostData = 'post-data';
             
             /* Reporting options */
             taskInput.ReportType = 'xml';
@@ -148,15 +95,8 @@ describe('OWASP Zap Scan Inputs', () => {
             taskInput.MaxLowRiskAlerts = 1;
         });
 
-        it('Should return zap.k2vsoftware.com ZapApiUrl is called', () => {
-            expect(taskInput.ZapApiUrl).toEqual('zap.k2vsoftware.com');
-        });
-
-        it('Should return xxxxxxxxxxxxx when ZapApiKey is called', () => {
-            expect(taskInput.ZapApiKey).toEqual('xxxxxxxxxxxxx');
-        });
-
-        it('Should return when ZapApiUrl is called', () => {
+        it('Should return when TargetUrl is called', () => {
+            // tslint:disable-next-line:no-http-string
             expect(taskInput.TargetUrl).toEqual('http://example.com');
         });
 
@@ -164,48 +104,16 @@ describe('OWASP Zap Scan Inputs', () => {
             expect(taskInput.ExecuteSpiderScan).toBeTruthy();
         });
 
-        it('Should return true when RecurseSpider is called', () => {
-            expect(taskInput.RecurseSpider).toBeTruthy();
-        });
-
-        it('Should return true when SubTreeOnly is called', () => {
-            expect(taskInput.SubTreeOnly).toBeTruthy();
-        });
-
         it('Should return empty string when MaxChildrenToCrawl is called', () => {
             expect(taskInput.MaxChildrenToCrawl).toEqual('5');
-        });
-
-        it('Should return empty string when ContextName is called', () => {
-            expect(taskInput.ContextName).toEqual('text-context');
         });
 
         it('Should return true when ExecuteActiveScan is called', () => {
             expect(taskInput.ExecuteActiveScan).toBeTruthy();
         });
 
-        it('Should return empty string when ContextId is called', () => {
-            expect(taskInput.ContextId).toEqual('1');
-        });
-
-        it('Should return true when Recurse is called', () => {
-            expect(taskInput.Recurse).toBeTruthy();
-        });
-
-        it('Should return true when InScopeOnly is called', () => {
-            expect(taskInput.InScopeOnly).toBeTruthy();
-        });
-
         it('Should return empty string when ScanPolicyName is called', () => {
             expect(taskInput.ScanPolicyName).toEqual('policy-name');
-        });
-
-        it('Should return empty string when Method is called', () => {
-            expect(taskInput.Method).toEqual('method');
-        });
-
-        it('Should return empty string when PostData is called', () => {
-            expect(taskInput.PostData).toEqual('post-data');
         });
 
         it('Should return empty string when ReportType is called', () => {

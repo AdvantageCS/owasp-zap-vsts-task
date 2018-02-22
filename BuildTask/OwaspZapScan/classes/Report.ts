@@ -3,7 +3,6 @@ import * as path from 'path';
 import * as Task from 'vsts-task-lib';
 import * as Request from 'request';
 import * as RequestPromise from 'request-promise';
-import * as XmlParser from 'xmljson';
 
 import { AlertItem } from './../interfaces/types/ZapReport';
 import { AlertRowType, ReportType } from './../enums/Enums';
@@ -16,8 +15,6 @@ import { RequestService } from './RequestService';
 
 export class Report {
     private _reportOptions: ZapRequestOptionsBase;
-    private _requestOptions: Request.UriOptions & RequestPromise.RequestPromiseOptions;  
-
     private _helper: Helper;    
     private _requestService: RequestService;
     private _taskInputs: TaskInput;
@@ -29,19 +26,11 @@ export class Report {
 
         /* Report Options */
         this._reportOptions = {
-            apikey: this._taskInputs.ZapApiKey,
             formMethod: 'GET'
-        };
-
-        /* Report Request Options */
-        this._requestOptions = {
-            // tslint:disable-next-line:no-http-string
-            uri: `http://${this._taskInputs.ZapApiUrl}/OTHER/core/other`,
-            qs: this._reportOptions
         };
     }
 
-    GenerateReportOfType(type: ReportType): Promise<string> {
+    generateReportOfType(type: ReportType): Promise<string> {
         let reportType: string = 'xmlreport';
 
         /* Set report type */
@@ -49,12 +38,12 @@ export class Report {
         if (type === ReportType.HTML) { reportType = Constants.HTML_REPORT; } 
         if (type === ReportType.MD) { reportType = Constants.MD_REPORT; }
 
-        this._requestOptions.uri = `${this._requestOptions.uri}/${reportType}/`;
-
-        return this._requestService.SendRequestGetResponseAsString('Active Scan Results', this._requestOptions);
+        return this._requestService.sendRequestGetResponseAsString(`OTHER/core/other/${reportType}/`, this._reportOptions);
     }
 
     async GenerateReport(): Promise<boolean> {
+        Task.debug('Generating report...');
+
         let type: ReportType;
         let ext: string;
         let scanReport: string;
@@ -82,14 +71,14 @@ export class Report {
 
         if (type === ReportType.HTML) {
             /* Get the Scan Result */
-            const xmlResult: string = await this.GenerateReportOfType(ReportType.XML);
+            const xmlResult: string = await this.generateReportOfType(ReportType.XML);
             /* Sort and Count the Alerts */
-            const processedAlerts: AlertResult = this._helper.ProcessAlerts(xmlResult, this._taskInputs.TargetUrl);
+            const processedAlerts: AlertResult = this._helper.processAlerts(xmlResult, this._taskInputs.TargetUrl);
             /* Generate the Custom HTML Report */
             scanReport = this.createCustomHtmlReport(processedAlerts);
 
         } else {
-            scanReport = await this.GenerateReportOfType(type);
+            scanReport = await this.generateReportOfType(type);
         }        
         
         /* Write the File */
@@ -104,7 +93,7 @@ export class Report {
         });    
     }
 
-    PrintResult(highAlerts: number, mediumAlerts: number, lowAlerts: number, infoAlerts: number): void {
+    printResult(highAlerts: number, mediumAlerts: number, lowAlerts: number, infoAlerts: number): void {
         /* istanbul ignore if */
         if (process.env.NODE_ENV !== 'test') { 
             console.log();
@@ -126,9 +115,9 @@ export class Report {
     private createCustomHtmlReport(alertResult: AlertResult): string {
         let alertHtmlTables: string = '';
 
-        for (const idx of Object.keys(alertResult.Alerts)) {
+        for (const alert of alertResult.Alerts) {
             alertHtmlTables += `
-                ${this.createAlertTable(alertResult.Alerts[Number(idx)])}
+                ${this.createAlertTable(alert)}
 
             `;
         }
@@ -232,13 +221,14 @@ export class Report {
     }
 
     private createAlertTable(alert: AlertItem): string {
+        console.log(alert);
         let cssClass: string = 'bg-success';
         // tslint:disable-next-line:insecure-random
         const collapseId: string = String(Math.floor(Math.random() * 10000));
         let tableRows: string = '';
         let instanceRows: string = '';
 
-        switch (alert.riskcode) {
+        switch (alert.riskcode[0]) {
             case Constants.HIGH_RISK:
                 cssClass = 'bg-danger';
                 break;
@@ -253,37 +243,33 @@ export class Report {
                 break;
         }
 
-        for (const idx of Object.keys(alert.instances.instance)) {
-            const i: number = Number(idx);
-
-            if (alert.instances.instance[i]) {
-                instanceRows += `
-                    ${alert.instances.instance[i].uri ? this.createAlertRow('URL', alert.instances.instance[i].uri, AlertRowType.InstanceRow) : ''}
-                    ${alert.instances.instance[i].method ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Method', alert.instances.instance[i].method, AlertRowType.InstanceRow) : ''}
-                    ${alert.instances.instance[i].evidence ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Evidence', alert.instances.instance[i].evidence, AlertRowType.InstanceRow) : ''}
-                    ${alert.instances.instance[i].param ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Parameters', alert.instances.instance[i].param, AlertRowType.InstanceRow) : ''}
-                    ${alert.instances.instance[i].attack ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Attack', alert.instances.instance[i].attack, AlertRowType.InstanceRow) : ''}
-                `; 
-            }            
+        for (const instance of alert.instances[0].instance) {
+            instanceRows += `
+                ${instance.uri !== undefined ? this.createAlertRow('URL', instance.uri[0], AlertRowType.InstanceRow) : ''}
+                ${instance.method !== undefined ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Method', instance.method[0], AlertRowType.InstanceRow) : ''}
+                ${instance.evidence !== undefined ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Evidence', instance.evidence[0], AlertRowType.InstanceRow) : ''}
+                ${instance.param !== undefined ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Parameters', instance.param[0], AlertRowType.InstanceRow) : ''}
+                ${instance.attack !== undefined ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Attack', instance.attack[0], AlertRowType.InstanceRow) : ''}
+            `; 
         }
 
         tableRows = `
-            ${this.createAlertRow('Description', alert.desc)}
+            ${this.createAlertRow('Description', alert.desc[0])}
             ${instanceRows}
-            ${this.createAlertRow('Instances', alert.count)}
-            ${this.createAlertRow('Solution', alert.solution)}
-            ${this.createAlertRow('Confidence', alert.confidence)}
-            ${this.createAlertRow('Reference', alert.reference)}
-            ${this.createAlertRow('CWE ID', alert.cweid)}
-            ${this.createAlertRow('WASC ID', alert.wascid)}
-            ${this.createAlertRow('Source ID', alert.sourceid)}
+            ${this.createAlertRow('Instances', alert.count[0])}
+            ${this.createAlertRow('Solution', alert.solution[0])}
+            ${this.createAlertRow('Confidence', alert.confidence[0])}
+            ${this.createAlertRow('Reference', alert.reference[0])}
+            ${this.createAlertRow('CWE ID', alert.cweid[0])}
+            ${this.createAlertRow('WASC ID', alert.wascid[0])}
+            ${this.createAlertRow('Source ID', alert.sourceid[0])}
         `;
 
         const htmlString: string = `
         <table class="table">
             <tr class="${cssClass}" height="24">
-                <td width="20%"><p class="alert-header"><a name="${alert.riskcode}" class="alert-header-link" data-toggle="collapse" href="#collapseBlock${collapseId}" aria-expanded="false" aria-controls="collapseExample" >${alert.riskdesc}</a></p></td>
-                <td width="80%"><p class="alert-header">${alert.name}</p></td>
+                <td width="20%"><p class="alert-header"><a name="${alert.riskcode[0]}" class="alert-header-link" data-toggle="collapse" href="#collapseBlock${collapseId}" aria-expanded="false" aria-controls="collapseExample" >${alert.riskdesc}</a></p></td>
+                <td width="80%"><p class="alert-header">${alert.name[0]}</p></td>
             </tr>
             <tbody class="collapse" id="collapseBlock${collapseId}">
                 ${tableRows}

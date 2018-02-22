@@ -1,32 +1,44 @@
+import * as Task from 'vsts-task-lib';
+
 import { ZapScanBase } from './ZapScanBase';
-import { ScanResult } from './../interfaces/types/ScanResult';
-import { ZapSpiderScanOptions } from '../interfaces/types/ZapScan';
+import { ViewUrlsResult } from '../interfaces/types/ZapScan';
 import { ZapScanType } from '../enums/Enums';
 import { TaskInput } from './TaskInput';
 import { RequestService } from './RequestService';
 
 export class SpiderScan extends ZapScanBase {
-    constructor(taskInputs: TaskInput, requestService: RequestService) {
-        /* Spider Scan Options */
-        const scanOptions = {
-            apikey: taskInputs.ZapApiKey,
-            url: taskInputs.TargetUrl,        
-            maxChildren: taskInputs.MaxChildrenToCrawl,
-            recurse: String(taskInputs.RecurseSpider),
-            subtreeOnly: String(taskInputs.SubTreeOnly),
-            contextName: taskInputs.ContextName,
-            formMethod: 'GET',
-            zapapiformat: 'JSON'
-        };
-
-        super(taskInputs, ZapScanType.Spider, 'Spider Scan', requestService, {
-            // tslint:disable-next-line:no-http-string
-            uri: `http://${taskInputs.ZapApiUrl}/JSON/spider/action/scan/`,
-            qs: scanOptions
+    constructor(taskInputs: TaskInput, requestService: RequestService, url?: string, contextId?: string, contextName?: string, userId?: string) {
+        super(taskInputs, requestService, {
+            url: url,
+            maxChildren: taskInputs.MaxChildrenToCrawl
         });
+        
+        if (userId) {
+            this.scanOptions.userId = userId;
+            this.scanOptions.contextId = contextId;
+        }
+        else {
+            this.scanOptions.contextName = contextName;
+        }
     }
-    
-    ExecuteScan(): Promise<ScanResult> {
-        return super.ExecuteScan();
+
+    public async executeScan(): Promise<void> {
+        await super.executeScan();
+        const result: ViewUrlsResult = await this.requestService.getView<ViewUrlsResult>(this.taskInputs, 'core', 'urls', {});
+        for (const url of result.urls) {
+            Task.debug(`Found URL: ${url}`);
+        }
+    }
+
+    protected get component(): string {
+        return 'spider';
+    }
+
+    public get scanType(): string {
+        return 'Spider Scan';
+    }
+
+    public get zapScanType(): ZapScanType {
+        return ZapScanType.Spider;
     }
 }
