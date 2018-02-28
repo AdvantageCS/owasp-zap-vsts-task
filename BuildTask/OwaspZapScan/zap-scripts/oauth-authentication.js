@@ -62,8 +62,9 @@ OAuthAuthenticator.prototype = {
             print(response.getResponseBody().toString())
         }
         else {
-            print('Authentication succes. Token = ' + parsedResponse.access_token);
-            org.zaproxy.zap.extension.script.ScriptVars.setGlobalVar("access_token", parsedResponse.access_token)
+            print('Authentication success.');
+            //print(' token = ' + parsedResponse.access_token);
+            org.zaproxy.zap.extension.script.ScriptVars.setGlobalVar('access_token', parsedResponse.access_token)
         }
         return response;
     },

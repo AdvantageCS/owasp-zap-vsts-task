@@ -13,9 +13,8 @@ export class UIContext {
         const startUrl = `${taskInputs.TargetUrl}/admin`;
         const context = new Context(taskInputs, requestService, contextName);
         const contextId = await context.create();
-        await context.includeInContext(`${startUrl}.*`);
-        await context.includeInContext(`${taskInputs.TargetUrl}/api/docs.*`);
-        await context.includeInContext(`${taskInputs.TargetUrl}/schemas.*`);
+        await context.includeInContext(`${taskInputs.TargetUrl}.*`);
+        await context.excludeFromContext(`${taskInputs.TargetUrl}/api.*`);
         await context.setWindowsAuthentication('');
         const userId = await context.createStandardUser(taskInputs.WindowsUsername, taskInputs.WindowsPassword);
 

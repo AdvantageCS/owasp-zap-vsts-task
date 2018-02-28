@@ -15,7 +15,6 @@ export class ApiContext {
         const context = new Context(taskInputs, requestService, 'Api');
         const contextId = await context.create();
         await context.includeInContext(`${taskInputs.TargetUrl}/api.*`);
-        await context.excludeFromContext(`${taskInputs.TargetUrl}/api/docs.*`);
 
         // load the auth/sender scripts
         const apiAuthScript = new Scripts(taskInputs, requestService, ApiContext.authScriptName);
