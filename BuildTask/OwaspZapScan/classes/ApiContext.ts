@@ -28,11 +28,11 @@ export class ApiContext {
         const userId = await context.createTokenUser(taskInputs.AuthClientId, taskInputs.AuthClientSecret);
 
         /* Import the Open API URLs */
-        await new OpenApiScan(taskInputs, requestService).import(`${taskInputs.TargetUrl}/api/docs/v1/swagger.json`);
+        await new OpenApiScan(taskInputs, requestService).import(`${taskInputs.TargetUrl}/docs/api/2018-01/open-api.json`);
 
         /* Execute Active Scan if selected */
         if (taskInputs.ExecuteActiveScan) {
-            const scan = new ActiveScan(taskInputs, requestService, `${taskInputs.TargetUrl}/api`, contextId, userId);
+            const scan = new ActiveScan(taskInputs, requestService, contextId, userId);
             await scan.executeScan();
         }        
     }

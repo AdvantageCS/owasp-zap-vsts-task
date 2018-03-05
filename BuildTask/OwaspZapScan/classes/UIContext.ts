@@ -25,7 +25,7 @@ export class UIContext {
         }
         /* Execute Active Scan if selected */
         if (taskInputs.ExecuteActiveScan) {
-            const scan = new ActiveScan(taskInputs, requestService, startUrl, contextId, userId);
+            const scan = new ActiveScan(taskInputs, requestService, contextId, userId);
             await scan.executeScan();
         }
     }
