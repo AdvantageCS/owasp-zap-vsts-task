@@ -221,7 +221,7 @@ export class Report {
     }
 
     private createAlertTable(alert: AlertItem): string {
-        console.log(alert);
+        Task.debug(`Processed alert for scan report: ${JSON.stringify(alert)}`);
         let cssClass: string = 'bg-success';
         // tslint:disable-next-line:insecure-random
         const collapseId: string = String(Math.floor(Math.random() * 10000));
@@ -245,24 +245,24 @@ export class Report {
 
         for (const instance of alert.instances[0].instance) {
             instanceRows += `
-                ${instance.uri !== undefined ? this.createAlertRow('URL', instance.uri[0], AlertRowType.InstanceRow) : ''}
-                ${instance.method !== undefined ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Method', instance.method[0], AlertRowType.InstanceRow) : ''}
-                ${instance.evidence !== undefined ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Evidence', instance.evidence[0], AlertRowType.InstanceRow) : ''}
-                ${instance.param !== undefined ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Parameters', instance.param[0], AlertRowType.InstanceRow) : ''}
-                ${instance.attack !== undefined ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Attack', instance.attack[0], AlertRowType.InstanceRow) : ''}
+                ${instance.uri !== undefined ? this.createAlertRow('URL', instance.uri, AlertRowType.InstanceRow) : ''}
+                ${instance.method !== undefined ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Method', instance.method, AlertRowType.InstanceRow) : ''}
+                ${instance.evidence !== undefined ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Evidence', instance.evidence, AlertRowType.InstanceRow) : ''}
+                ${instance.param !== undefined ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Parameters', instance.param, AlertRowType.InstanceRow) : ''}
+                ${instance.attack !== undefined ? this.createAlertRow('&nbsp;&nbsp;&nbsp;&nbsp;Attack', instance.attack, AlertRowType.InstanceRow) : ''}
             `; 
         }
 
         tableRows = `
-            ${this.createAlertRow('Description', alert.desc[0])}
+            ${this.createAlertRow('Description', alert.desc)}
             ${instanceRows}
-            ${this.createAlertRow('Instances', alert.count[0])}
-            ${this.createAlertRow('Solution', alert.solution[0])}
-            ${this.createAlertRow('Confidence', alert.confidence[0])}
-            ${this.createAlertRow('Reference', alert.reference[0])}
-            ${this.createAlertRow('CWE ID', alert.cweid[0])}
-            ${this.createAlertRow('WASC ID', alert.wascid[0])}
-            ${this.createAlertRow('Source ID', alert.sourceid[0])}
+            ${this.createAlertRow('Instances', alert.count)}
+            ${this.createAlertRow('Solution', alert.solution)}
+            ${this.createAlertRow('Confidence', alert.confidence)}
+            ${this.createAlertRow('Reference', alert.reference)}
+            ${this.createAlertRow('CWE ID', alert.cweid)}
+            ${this.createAlertRow('WASC ID', alert.wascid)}
+            ${this.createAlertRow('Source ID', alert.sourceid)}
         `;
 
         const htmlString: string = `
@@ -280,7 +280,7 @@ export class Report {
         return htmlString;
     }
 
-    private createAlertRow(header: string, value: string, rowType: AlertRowType = AlertRowType.AlertRow): string {
+    private createAlertRow(header: string, value: string[], rowType: AlertRowType = AlertRowType.AlertRow): string {
         let cssClass: string = 'attribute';
 
         if (rowType === AlertRowType.InstanceRow) {
@@ -293,7 +293,7 @@ export class Report {
                 <p class="lead ${cssClass}" style="font-size: 1.1em;">${header}</p>
             </td>
             <td width="80%">
-                <p class="lead">${value}</p>
+                <p class="lead">${value ? value[0] : ''}</p>
             </td>
         </tr>
         `;

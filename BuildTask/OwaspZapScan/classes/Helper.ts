@@ -30,7 +30,7 @@ export class Helper {
 
             const reportJson: ScanReport = res;
             const sites: Site[] = reportJson.OWASPZAPReport.site;
-            Task.debug(`Scan report: ${sites}`);
+            Task.debug(`Scan report: ${JSON.stringify(sites)}`);
 
             for (const site of sites) {
                 if (targetUrl.startsWith(site.$.name)) {
@@ -57,7 +57,7 @@ export class Helper {
         const info: Array<AlertItem> = new Array<AlertItem>();
 
         for (const alert of alerts) {
-            Task.debug(`Scan report alert: ${alert}`);
+            Task.debug(`Scan report alert: ${JSON.stringify(alert)}`);
             if (alert.riskcode[0] === Constants.HIGH_RISK) {
                 high.push(alert);
                 alertResult.HighAlerts++;
