@@ -23,10 +23,6 @@ describe('OWASP Zap Scan Inputs', () => {
             expect(taskInput.ExecuteActiveScan).toBeFalsy();
         });
 
-        it('Should return empty string when ScanPolicyName is called', () => {
-            expect(taskInput.ScanPolicyName).toEqual('');
-        });
-
         it('Should return empty string when ReportType is called', () => {
             expect(taskInput.ReportType).toEqual('');
         });
@@ -79,7 +75,6 @@ describe('OWASP Zap Scan Inputs', () => {
             
             /* Active Scan Options inputs */
             taskInput.ExecuteActiveScan = true;
-            taskInput.ScanPolicyName = 'policy-name';
             
             /* Reporting options */
             taskInput.ReportType = 'xml';
@@ -110,10 +105,6 @@ describe('OWASP Zap Scan Inputs', () => {
 
         it('Should return true when ExecuteActiveScan is called', () => {
             expect(taskInput.ExecuteActiveScan).toBeTruthy();
-        });
-
-        it('Should return empty string when ScanPolicyName is called', () => {
-            expect(taskInput.ScanPolicyName).toEqual('policy-name');
         });
 
         it('Should return empty string when ReportType is called', () => {

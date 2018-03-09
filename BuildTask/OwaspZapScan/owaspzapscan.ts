@@ -31,7 +31,6 @@ async function run(): Promise<void> {
     
     /* Active Scan Options inputs */
     taskInputs.ExecuteActiveScan = Task.getBoolInput('ExecuteActiveScan');
-    taskInputs.ScanPolicyName = Task.getInput('ScanPolicyName');
     
     /* Reporting options */
     taskInputs.ReportType = Task.getInput('ReportType');
@@ -73,6 +72,5 @@ async function run(): Promise<void> {
 }   
 
 run().catch((err: any) => {
-    console.log(err);
     Task.setResult(Task.TaskResult.Failed, `Failed to initiate the active scan. Error: ${err.message || err}`);
 });

@@ -21,7 +21,7 @@ export class RequestService {
 
     executeActionCheckResult(taskInputs: TaskInput, component: string, action: string, params: any): Promise<void> {
         return this.executeAction<SimpleResult>(taskInputs, component, action, params)
-            .then((result: SimpleResult) => result.Result === 'OK' ? Promise.resolve() : Promise.reject(result.Result));
+            .then((result: SimpleResult) => result.Result === 'OK' ? Promise.resolve() : Promise.reject(result));
     }
 
     sendRequestGetResponseAsString(relativeUri: string, params: any): Promise<string> {

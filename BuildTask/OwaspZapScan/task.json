@@ -19,7 +19,7 @@
     "version": {
         "Major": 1,
         "Minor": 58,
-        "Patch": 4
+        "Patch": 5
     },
     "demands": [
         "npm"
@@ -80,15 +80,6 @@
             "required": false,
             "groupName": "scanOptions",
             "helpMarkDown": "Enable to run a active scan on the target."
-        },
-        {
-            "name": "ScanPolicyName",
-            "type": "string",
-            "label": "Scan Policy Name",
-            "required": false,
-            "groupName": "scanOptions",
-            "helpMarkDown": "Scan Policy Name allows to specify the scan policy (if none is given it uses the default scan policy)",
-            "visibleRule": "ExecuteActiveScan = true"
         },
         {
             "name": "AuthClientId",

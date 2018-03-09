@@ -4,9 +4,9 @@ import { TaskInput } from './TaskInput';
 import { RequestService } from './RequestService';
 
 export class ActiveScan extends ZapScanBase {
-    constructor(taskInputs: TaskInput, requestService: RequestService, contextId?: string, userId?: string) {
+    constructor(taskInputs: TaskInput, requestService: RequestService, scanPolicyName: string, contextId?: string, userId?: string) {
         super(taskInputs, requestService, {
-            scanPolicyName: taskInputs.ScanPolicyName,
+            scanPolicyName: scanPolicyName,
             userId: userId,
             contextId: contextId
         });

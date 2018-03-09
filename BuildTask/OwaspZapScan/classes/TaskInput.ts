@@ -44,16 +44,6 @@ export class TaskInput {
         return this._executeActiveScan;
     }
 
-
-    private _scanPolicyName: string = '';
-    set ScanPolicyName(value: string) {
-        this._scanPolicyName = value;
-    }
-
-    get ScanPolicyName(): string {
-        return this._scanPolicyName;
-    }
-
     
     /* Reporting */
     private _reportType: string = '';

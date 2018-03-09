@@ -25,7 +25,7 @@
             "name": "Launch Program",
             "program": "${workspaceFolder}\\dist\\BuildTask\\OwaspZapScan\\owaspzapscan.js",
             "env": {
-                "INPUT_TargetUrl": "https://localhost/card-vault",
+                "INPUT_TargetUrl": "https://marley/card-vault",
                 "INPUT_ExecuteSpiderScan": "true",
                 "INPUT_MaxChildrenToCrawl": "",
                 "INPUT_ExecuteActiveScan": "true",
@@ -34,7 +34,11 @@
                 "INPUT_ReportFileName": "owasp-scan",
                 "INPUT_EnableVerifications": "true",
                 "INPUT_MaxHighRiskAlerts": "0",
-                "INPUT_MaxMediumRiskAlerts": "0"
+                "INPUT_MaxMediumRiskAlerts": "0",
+                "INPUT_AuthClientId": "ZAP-SCAN/SCAN",
+                "INPUT_AuthClientSecret": "secret",
+                "INPUT_WindowsUsername": "cv-load-test-admin",
+                "INPUT_WindowsPassword": "password"
             },
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
