@@ -1,238 +1,221 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <configuration>
+    <!-- See: https://github.com/zaproxy/zaproxy/blob/4b4342f1c424d1f11ecb7e4cfb6705c416928e7e/src/doc/scanners.md -->
     <policy>API Policy</policy>
     <scanner>
         <level>MEDIUM</level>
         <strength>MEDIUM</strength>
     </scanner>
     <plugins>
+        <!-- Directory/path traversal -->
         <p6>
             <enabled>false</enabled>
             <level>OFF</level>
         </p6>
+        <!-- Remote file inclusion -->
         <p7>
             <enabled>false</enabled>
             <level>OFF</level>
         </p7>
-        <p40009>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p40009>
-        <p40012>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p40012>
-        <p40014>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p40014>
-        <p40018>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p40018>
-        <p90019>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p90019>
-        <p90020>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p90020>
-        <p0>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p0>
-        <p20019>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p20019>
-        <p30001>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p30001>
-        <p30002>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p30002>
-        <p40003>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p40003>
-        <p40008>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p40008>
-        <p40016>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p40016>
-        <p40017>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p40017>
-        <p50000>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p50000>
-        <p42>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p42>
-        <p10045>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p10045>
-        <p10048>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p10048>
-        <p20012>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p20012>
-        <p20015>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p20015>
-        <p20016>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p20016>
-        <p20017>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p20017>
-        <p20018>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p20018>
-        <p40013>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p40013>
-        <p40019>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p40019>
-        <p40020>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p40020>
-        <p40021>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p40021>
-        <p40022>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p40022>
-        <p90018>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p90018>
-        <p90021>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p90021>
-        <p90023>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p90023>
-        <p90024>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p90024>
-        <p90025>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p90025>
-        <p10095>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p10095>
-        <p30003>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p30003>
-        <p90028>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p90028>
-        <p20014>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p20014>
-        <p40023>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p40023>
+        <!-- Source code disclosure - git -->
         <p41>
             <enabled>false</enabled>
             <level>OFF</level>
         </p41>
+        <!-- Source code disclosure - SVN -->
+        <p42>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p42>
+        <!-- Source code disclosure - File inclusion -->
         <p43>
             <enabled>false</enabled>
             <level>OFF</level>
         </p43>
-        <p10107>
+        <!-- Source Code Disclosure - WEB-INF folder -->
+        <p10045>
             <enabled>false</enabled>
             <level>OFF</level>
-        </p10107>
-        <p40015>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p40015>
-        <p40024>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p40024>
-        <p40026>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p40026>
-        <p60100>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p60100>
-        <p60101>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p60101>
-        <p90026>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p90026>
-        <p90029>
-            <enabled>true</enabled>
-            <level>MEDIUM</level>
-        </p90029>
-        <p10051>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p10051>
-        <p10053>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p10053>
-        <p10104>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p10104>
-        <p10106>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p10106>
-        <p40025>
-            <enabled>false</enabled>
-            <level>OFF</level>
-        </p40025>
+        </p10045>
+        <!-- HTTPS Content Available via HTTP -->
         <p10047>
             <enabled>false</enabled>
             <level>OFF</level>
         </p10047>
+        <!-- ShellShock -->
+        <p10048>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p10048>
+        <!-- Relative Path Confusion -->
+        <p10051>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p10051>
+        <!-- Apache Range Header DoS (CVE-2011-3192) -->
+        <p10053>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p10053>
+        <!-- Backup File Disclosure -->
+        <p10095>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p10095>
+        <!-- TestUserAgent -->
+        <p10104>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p10104>
+        <!-- Http Only Site -->
+        <p10106>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p10106>
+        <!-- Httpoxy - Proxy Header Misuse -->
+        <p10107>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p10107>
+        <!-- Anti CSRF Tokens Scanner -->
+        <p20012>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p20012>
+        <!-- HTTP Parameter Pollution -->
+        <p20014>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p20014>
+        <!-- Heartbleed OpenSSL Vulnerability -->
+        <p20015>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p20015>
+        <!-- Cross-Domain Requests Permitted -->
+        <p20016>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p20016>
+        <!-- Source Code Disclosure - CVE-2012-1823 -->
+        <p20017>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p20017>
+        <!-- Remote Code Execution - CVE-2012-1823 -->
+        <p20018>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p20018>
+        <!-- Check for proper integer handling in back end c code. -->
+        <p30003>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p30003>
+        <!-- Cross Site Scripting (Reflected) -->
+        <p40012>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40012>
+        <!-- Session Fixation -->
+        <p40013>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40013>
+        <!-- Persistent XSS (Attack) -->
+        <p40014>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40014>
+        <!-- LDAP Injection -->
+        <p40015>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40015>
+        <!-- Persistent XSS (Prime) -->
+        <p40016>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40016>
+        <!-- Persistent XSS (Spider) -->
+        <p40017>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40017>
+        <!-- SQL Injection MySQL -->
+        <p40019>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40019>
+        <!-- SQL Injection Hypersonic -->
+        <p40020>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40020>
+        <!-- SQL Injection Oracle -->
+        <p40021>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40021>
+        <!-- SQL Injection Postgresql -->
+        <p40022>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40022>
+        <!-- Username Enumeration -->
+        <p40023>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40023>
+        <!-- SQL Injection SQLite -->
+        <p40024>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40024>
+        <!-- Proxy Disclosure -->
+        <p40025>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40025>
+        <!-- Cross site scripting (DOM) -->
+        <p40026>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40026>
+        <!-- Example simple active rule -->
+        <p60100>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p60100>
+        <!-- Example file active rule -->
+        <p60101>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p60101>
+        <!-- SQL Injection SQLMap -->
+        <p90018>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p90018>
+        <!-- Generic Padding Oracle -->
+        <p90024>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p90024>
+        <!-- Expression Language Injection -->
+        <p90025>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p90025>
+        <!-- Cookie Slack Detector -->
         <p90027>
             <enabled>false</enabled>
             <level>OFF</level>
         </p90027>
+        <!-- Insecure HTTP Method -->
+        <p90028>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p90028>
     </plugins>
 </configuration>

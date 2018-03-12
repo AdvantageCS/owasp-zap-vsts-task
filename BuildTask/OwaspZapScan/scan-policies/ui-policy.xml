@@ -1,8 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <configuration>
+    <!-- See: https://github.com/zaproxy/zaproxy/blob/4b4342f1c424d1f11ecb7e4cfb6705c416928e7e/src/doc/scanners.md -->
     <policy>UI Policy</policy>
     <scanner>
         <level>MEDIUM</level>
         <strength>MEDIUM</strength>
     </scanner>
+    <plugins>
+        <!-- Source Code Disclosure - Git -->
+        <p41>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p41>
+        <!-- Source Code Disclosure - SVN -->
+        <p42>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p42>
+        <!-- Source Code Disclosure - File Inclusion -->
+        <p43>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p43>
+        <!-- Source Code Disclosure - WEB-INF folder -->
+        <p10045>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p10045>
+        <!-- Backup File Disclosure -->
+        <p10095>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p10095>
+        <!-- SQL Injection MySQL -->
+        <p40019>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40019>
+        <!-- SQL Injection Hypersonic -->
+        <p40020>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40020>
+        <!-- SQL Injection Oracle -->
+        <p40021>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40021>
+        <!-- SQL Injection Postgresql -->
+        <p40022>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40022>
+        <!-- SQL Injection SQLite -->
+        <p40024>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40024>
+        <!-- SOAP Action Spoofing -->
+        <p90026>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p90026>
+        <!-- SOAP XML Injection -->
+        <p90029>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p90029>
+        <!-- WSDL File Detection -->
+        <p90030>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p90030>
+    </plugins>
 </configuration>
