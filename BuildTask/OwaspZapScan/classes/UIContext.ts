@@ -19,6 +19,7 @@ export class UIContext {
         const contextId = await context.create();
         await context.includeInContext(`${taskInputs.TargetUrl}.*`);
         await context.excludeFromContext(`${taskInputs.TargetUrl}/api.*`);
+        await context.excludeFromContext(`${taskInputs.TargetUrl}/lib/jquery/dist/.*`);
         await context.setWindowsAuthentication('');
         const userId = await context.createStandardUser(taskInputs.WindowsUsername, taskInputs.WindowsPassword);
 
@@ -28,7 +29,7 @@ export class UIContext {
 
         /* Execute Spider Scan if selected */
         if (taskInputs.ExecuteSpiderScan) {
-            const scan = new SpiderScan(taskInputs, requestService, startUrl, contextId, contextName, userId);
+            const scan = new SpiderScan(taskInputs, requestService, startUrl, contextId, contextName, userId, 45);
             await scan.executeScan();
         }
         /* Execute Active Scan if selected */

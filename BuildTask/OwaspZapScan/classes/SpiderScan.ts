@@ -7,7 +7,7 @@ import { TaskInput } from './TaskInput';
 import { RequestService } from './RequestService';
 
 export class SpiderScan extends ZapScanBase {
-    constructor(taskInputs: TaskInput, requestService: RequestService, url?: string, contextId?: string, contextName?: string, userId?: string) {
+    constructor(taskInputs: TaskInput, requestService: RequestService, url: string, contextId: string, contextName: string, userId: string, private expectedUrls: number) {
         super(taskInputs, requestService, {
             url: url,
             maxChildren: taskInputs.MaxChildrenToCrawl
@@ -27,6 +27,9 @@ export class SpiderScan extends ZapScanBase {
         const result: ViewUrlsResult = await this.requestService.getView<ViewUrlsResult>(this.taskInputs, 'core', 'urls', {});
         for (const url of result.urls) {
             Task.debug(`Found URL: ${url}`);
+        }
+        if (result.urls.length < this.expectedUrls) {
+            Task.setResult(Task.TaskResult.Failed, `Passive scan located ${result.urls.length} pages; expected at least ${this.expectedUrls}.`);            
         }
     }
 
