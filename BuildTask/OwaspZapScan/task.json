@@ -19,7 +19,7 @@
     "version": {
         "Major": 1,
         "Minor": 58,
-        "Patch": 9
+        "Patch": 11
     },
     "demands": [
         "npm"
@@ -55,6 +55,14 @@
             "required": true,
             "groupName": "scanOptions",
             "helpMarkDown": "Target URL where the active scan is performed against."
+        },
+        {
+            "name": "ApiVersion",
+            "type": "string",
+            "label": "API Version",
+            "required": true,
+            "groupName": "scanOptions",
+            "helpMarkDown": "The REST API version to use for the metadata check."
         },
         {
             "name": "ExecuteSpiderScan",

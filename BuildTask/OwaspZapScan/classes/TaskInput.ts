@@ -13,6 +13,16 @@ export class TaskInput {
     }
 
 
+    private _apiVersion: string = '2018-01';
+    set ApiVersion(value: string) {
+        this._apiVersion = value;
+    }
+
+    get ApiVersion(): string {
+        return this._apiVersion;
+    }
+    
+
     /* Spider Scan */
     private _executeSpiderScan: boolean = false;
     set ExecuteSpiderScan(value: boolean) {

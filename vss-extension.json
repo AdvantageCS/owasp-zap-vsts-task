@@ -3,7 +3,7 @@
     "id": "card-vault-owasp-zap-scan",
     "name": "Card Vault OWASP Zed Attack Proxy Scan",
     "publisher": "AdvantageCS",
-    "version": "1.0.17",
+    "version": "1.0.19",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"

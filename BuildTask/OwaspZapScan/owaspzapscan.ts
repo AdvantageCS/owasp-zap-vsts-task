@@ -18,6 +18,7 @@ async function run(): Promise<void> {
 
     /* Get the required inputs */
     taskInputs.TargetUrl = Task.getInput('TargetUrl', true);
+    taskInputs.ApiVersion = Task.getInput('ApiVersion', true);
     
     /* Authentication Options */
     taskInputs.AuthClientId = Task.getInput('AuthClientId', true);

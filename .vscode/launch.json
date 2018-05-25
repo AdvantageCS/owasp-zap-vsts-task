@@ -26,6 +26,7 @@
             "program": "${workspaceFolder}\\dist\\BuildTask\\OwaspZapScan\\owaspzapscan.js",
             "env": {
                 "INPUT_TargetUrl": "https://marley/card-vault",
+                "INPUT_ApiVersion": "2018-03",
                 "INPUT_ExecuteSpiderScan": "true",
                 "INPUT_MaxChildrenToCrawl": "",
                 "INPUT_ExecuteActiveScan": "true",

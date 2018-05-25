@@ -35,7 +35,7 @@ export class ApiContext {
         await scanPolicy.ensureImported(this.scanPolicyFileName);
 
         /* Import the Open API URLs */
-        await new OpenApiScan(taskInputs, requestService).import(`${taskInputs.TargetUrl}/docs/api/2018-01/open-api.json`);
+        await new OpenApiScan(taskInputs, requestService).import(`${taskInputs.TargetUrl}/docs/api/${taskInputs.ApiVersion}/open-api.json`);
 
         /* Execute Active Scan if selected */
         if (taskInputs.ExecuteActiveScan) {
