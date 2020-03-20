@@ -7,7 +7,7 @@ import { RequestService } from './RequestService';
 export class ZapRunner {
     async startZap(): Promise<RequestService> {
         const cmdPath = task.which('cmd');
-        const zapDir = 'C:\\OWASP\\ZAP';
+        const zapDir = 'C:\\Program Files\\OWASP\\Zed Attack Proxy';
         const zapPath = `${zapDir}\\zap.bat`;
         task.checkPath(zapPath, 'zap.bat');
 

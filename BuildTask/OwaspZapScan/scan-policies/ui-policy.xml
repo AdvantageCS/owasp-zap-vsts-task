@@ -57,6 +57,11 @@
             <enabled>false</enabled>
             <level>OFF</level>
         </p40024>
+        <!-- Trace.axd Information Leak -->
+        <p40029>
+            <enabled>false</enabled>
+            <level>OFF</level>
+        </p40029>
         <!-- SOAP Action Spoofing -->
         <p90026>
             <enabled>false</enabled>

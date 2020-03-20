@@ -19,7 +19,8 @@ export class UIContext {
         const contextId = await context.create();
         await context.includeInContext(`${taskInputs.TargetUrl}.*`);
         await context.excludeFromContext(`${taskInputs.TargetUrl}/api.*`);
-        await context.excludeFromContext(`${taskInputs.TargetUrl}/lib/jquery/dist/.*`);
+        await context.excludeFromContext(`${taskInputs.TargetUrl}/lib/jquery.*`);
+        await context.excludeFromContext(`${taskInputs.TargetUrl}/admin/hangfire/jobs/enqueued/trace.*`);
         await context.setWindowsAuthentication('');
         const userId = await context.createStandardUser(taskInputs.WindowsUsername, taskInputs.WindowsPassword);
 
